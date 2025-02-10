@@ -1,0 +1,42 @@
+THEMA: API mit user management + server hosting 
+backend gehostete API mit user management
+API kernthema + Anwendung in einer Projektmanagement App
+API komplett selber schreiben
+---
+API hosten 
+Email-server
+Datenbankserver  
+---
+Funktiodnen wie:
+Register 
+Login
+Passwort Reset
+User Löschen
+Nur seine Daten sehen können
+---
+Backend voll funktionsfähig mit allen features und security usw
+mit in memory data base arbeiten 
+und dieses Backend mit einem test-frontend (im Thema von original Projectly)
+---
+Aufgaben aufteilen in der Diplomarbeit
+Rick : Hosting von API, Mail, datenbank- server
+Ibrahim : API entwicklung, encryption, User management, Testwebsite 
+Hannes : Datenbank struktur, API entwicklung, swagger file 
+
+---
+Burgsatller
+Projektnummer:
+p245ay02
+
+Ausgangslage: umschreiben
+
+Fallstudie für eine API für to-do-listen
+
+warum brauchen wir das
+ 
+1. schauen ob es schon gibt
+2. schauen ob ich was ändern kann open source
+3. selbstentwicklung
+
+Meilensteine definieren
+
