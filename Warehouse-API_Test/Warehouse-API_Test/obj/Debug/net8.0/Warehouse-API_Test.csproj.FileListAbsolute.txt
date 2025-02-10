@@ -1,0 +1,8 @@
+C:\Users\iIBoS\source\repos\Hannibunn\Warehouse-API\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\Warehouse-API_Test.csproj.AssemblyReference.cache
+C:\Users\iIBoS\source\repos\Hannibunn\Warehouse-API\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\Warehouse-API_Test.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\iIBoS\source\repos\Hannibunn\Warehouse-API\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\Warehouse-API_Test.AssemblyInfoInputs.cache
+C:\Users\iIBoS\source\repos\Hannibunn\Warehouse-API\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\Warehouse-API_Test.AssemblyInfo.cs
+C:\Users\iIBoS\source\repos\Hannibunn\Warehouse-API\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\Warehouse-API_Test.csproj.CoreCompileInputs.cache
+C:\Users\iIBoS\source\repos\Hannibunn\Warehouse-API\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\Warehouse-API_Test.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\iIBoS\source\repos\Hannibunn\Warehouse-API\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\Warehouse-API_Test.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\iIBoS\source\repos\Hannibunn\Warehouse-API\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\Warehouse-API_Test.sourcelink.json
