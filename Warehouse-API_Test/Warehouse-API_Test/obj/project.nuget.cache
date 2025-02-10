@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z0NNcgpKKD0=",
+  "dgSpecHash": "PC916PKeO4U=",
   "success": true,
-  "projectFilePath": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\DIPLOMARBEIT_GIT\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
+  "projectFilePath": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gproc\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\gproc\\.nuget\\packages\\microsoft.openapi\\1.6.14\\microsoft.openapi.1.6.14.nupkg.sha512",
