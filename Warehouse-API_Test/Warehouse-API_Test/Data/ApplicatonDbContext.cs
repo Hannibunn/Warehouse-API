@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using Warehouse_API_Test.Migration;
+using Warehouse_API_Test.Models;
 
 namespace Warehouse_API_Test.Data
 {

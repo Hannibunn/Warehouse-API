@@ -1,16 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
-namespace Warehouse_API_Test.Migration
+namespace Warehouse_API_Test.Models
 {
     public class Users
     {
         [Key]
-        public int Id { get; set; }
+        public int Id { get; set; } 
         [Required]
-        public string email { get; set; } = null!;
+        public string email { get; set; } =null!;
         [Required]
-        public string HashedPassword { get; set; } = null!; 
+        public string HashedPassword { get; set; } = null!;
     }
 }

@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "Warehouse_API_Test.Controllers.LoginController",
+    "Method": "Createuser",
+    "RelativePath": "api/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "users",
+        "Type": "Warehouse_API_Test.Models.Users",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
