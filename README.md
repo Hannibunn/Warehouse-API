@@ -1,2 +1,3 @@
-# Warehouse-API
-A repository for an storage-system API which is being developed for a diploma thesis.
+# Open Warehouse API
+
+* [Vorjahres-Diplomarbeit](http://trac.d474base.eu/p225c01/wiki) `hprochaska / Ucee9oki`
