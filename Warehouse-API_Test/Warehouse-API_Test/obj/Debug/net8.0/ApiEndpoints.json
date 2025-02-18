@@ -1,18 +1,54 @@
 [
   {
     "ContainingType": "Warehouse_API_Test.Controllers.LoginController",
-    "Method": "Createuser",
-    "RelativePath": "api/Login",
+    "Method": "Login",
+    "RelativePath": "api/Login/Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "users",
+        "Name": "request",
         "Type": "Warehouse_API_Test.Models.Users",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Warehouse_API_Test.Controllers.LoginController",
+    "Method": "Register",
+    "RelativePath": "api/Login/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Warehouse_API_Test.Models.Users",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Warehouse_API_Test.Controllers.LoginController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/Login/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Warehouse_API_Test.Models.Users, Warehouse-API_Test, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

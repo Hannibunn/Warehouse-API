@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Warehouse_API_Test.Data;
+using Warehouse_API_Test;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Token einstellungen 
 var jwtSettings = builder.Configuration.GetSection("Jwt"); // lies was in Jwt ist 
 var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]); // hol was in jwt key und tuh es verschluesseln damit keiner den kez sehen kann
+builder.Services.AddSingleton<AuthService>();
 
 builder.Services.AddAuthentication(options =>
 {
