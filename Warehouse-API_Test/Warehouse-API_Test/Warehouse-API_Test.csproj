@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Warehouse_API_Test</RootNamespace>
+    <UserSecretsId>266e2987-45a3-4d92-acce-aec68ff3ffad</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

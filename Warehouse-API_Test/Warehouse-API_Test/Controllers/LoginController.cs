@@ -27,18 +27,31 @@ namespace Warehouse_API_Test.Controllers
         [HttpPost("Login")]
         public IActionResult Login([FromBody] Users request)
         {
-            if (request == null) return BadRequest("Anfrage ist leer!");
-            if (string.IsNullOrEmpty(request.email)) return BadRequest("E-Mail ist erforderlich!");
+            if (request == null)
+            {
+                return BadRequest("Anfrage ist leer!");
+            }
+
+            if (string.IsNullOrEmpty(request.email))
+            {
+                return BadRequest("E-Mail ist erforderlich!");
+            }
 
             var user = _context.Users.FirstOrDefault(u => u.email == request.email);
-            if (user == null) return Unauthorized("Ungültige Anmeldedaten!");
+            if (user == null)
+            {
+                return Unauthorized("Ungültige Anmeldedaten!");
+            }
 
             if (!BCrypt.Net.BCrypt.Verify(request.HashedPassword, user.HashedPassword))
             {
                 return Unauthorized("Ungültige Anmeldedaten!");
             }
 
-            if (_authService == null) return StatusCode(500, "AuthService nicht initialisiert!");
+            if (_authService == null)
+            {
+                return StatusCode(500, "AuthService nicht initialisiert!");
+            }
 
             var token = _authService.GenerateJwtToken(user.email);
             return Ok(new { Token = token });
