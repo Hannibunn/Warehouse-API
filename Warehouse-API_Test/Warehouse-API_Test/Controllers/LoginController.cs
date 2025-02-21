@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Warehouse_API_Test.APIKEYS;
 
 namespace Warehouse_API_Test.Controllers
 {
@@ -16,12 +17,13 @@ namespace Warehouse_API_Test.Controllers
     {
         private readonly AuthService _authService;
         private readonly ApplicatonDbContext _context;
-      
+        private readonly ApiKey _apiKeyService;
 
-        public LoginController(ApplicatonDbContext context, AuthService authService)
+        public LoginController(ApplicatonDbContext context, AuthService authService, ApiKey apiKeyService)
         {
             _context = context;
             _authService = authService;
+            _apiKeyService = apiKeyService;
         }
 
         [HttpPost("Login")]
@@ -88,9 +90,35 @@ namespace Warehouse_API_Test.Controllers
             var users = await _context.Users.ToListAsync();
             return Ok(users);
         }
+        [HttpPost("generate")]
+        public IActionResult GenerateApiKey()
+        {
+            var newKey = _apiKeyService.CreateApiKey();
+            return Ok(new { apiKey = newKey });
+        }
 
 
+        [HttpGet("apikeys")]
+        public IActionResult GetAllApiKeys()
+        {
+            var apiKeys = _apiKeyService.GetAllApiKeys();
+            return Ok(apiKeys); 
+        }
 
+        [HttpGet("protected-endpoint")]
+        public IActionResult GetProtectedData([FromHeader(Name = "X-Api-Key")] string apiKey)
+        {
+
+            var adminKey = _apiKeyService.GetAdminKey();
+
+            if (apiKey != adminKey)
+            {
+                return Unauthorized(new { message = "Ungültiger API-Key" });
+            }
+            return Ok(new { message = "Erfolgreicher Zugriff auf geschützte Daten" });
+        }
+
+     
 
     }
 }

@@ -1,6 +1,26 @@
 [
   {
     "ContainingType": "Warehouse_API_Test.Controllers.LoginController",
+    "Method": "GetAllApiKeys",
+    "RelativePath": "api/Login/apikeys",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Warehouse_API_Test.Controllers.LoginController",
+    "Method": "GenerateApiKey",
+    "RelativePath": "api/Login/generate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Warehouse_API_Test.Controllers.LoginController",
     "Method": "Login",
     "RelativePath": "api/Login/Login",
     "HttpMethod": "POST",
@@ -11,6 +31,22 @@
         "Name": "request",
         "Type": "Warehouse_API_Test.Models.Users",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Warehouse_API_Test.Controllers.LoginController",
+    "Method": "GetProtectedData",
+    "RelativePath": "api/Login/protected-endpoint",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "X-Api-Key",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -50,5 +86,15 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Warehouse_API_Test.Controllers.ProtectedController",
+    "Method": "GetProtectedData",
+    "RelativePath": "api/Protected",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]
