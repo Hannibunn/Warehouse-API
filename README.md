@@ -10,7 +10,7 @@ Projektnummer : p245ay02
 
 *Betreuer*
 *  **DI. Niklas Hack** (Hauptbetreuer)
-*  DI. Günther Burgstaller
+*  DI. Günter Burgstaller
   
 *Schüler*
 * **Rick Pleeging** (Hauptverantwortlicher)
@@ -21,3 +21,9 @@ Projektnummer : p245ay02
 * [Vorjahres-Diplomarbeit](http://trac.d474base.eu/p225c01/wiki) `hprochaska / Ucee9oki`
 * [Zuständigkeiten Betreuer](./Betreuung/betreuung.md)
 * [Diplomarbeitstagebuch](./DATB)
+
+## LaTeX
+
+* [LaTeX-Vorlage für Diplomarbeiten](https://github.com/GuenterBurgstaller/Diplomarbeitsvorlage)
+  * [LaTeX für Windows](https://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe) (TeX Live Installer)
+  * [Texmaker](https://www.xm1math.net/texmaker/)
