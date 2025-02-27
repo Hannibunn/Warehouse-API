@@ -20,7 +20,7 @@ Projektnummer : p245ay02
 
 * [Vorjahres-Diplomarbeit](http://trac.d474base.eu/p225c01/wiki) `hprochaska / Ucee9oki`
 * [Zuständigkeiten Betreuer](./Betreuung/betreuung.md)
-* [Diplomarbeitstagebuch](./DATB)
+* [Diplomarbeitstagebuch](./DATB/Diplomarbeitstagebuch.md)
 
 ## LaTeX
 * [Diplomschrift](Diplomschrift/_Diplomarbeit.pdf)
