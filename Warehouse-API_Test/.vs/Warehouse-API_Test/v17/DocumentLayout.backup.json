@@ -1,64 +1,64 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\",
+  "WorkspaceRootPath": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\controllers\\apicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\controllers\\apicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\apikeys\\apikey-middelware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\apikeys\\apikey-middelware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\apikeys\\apikey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\apikeys\\apikey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\data\\applicatondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\data\\applicatondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\migrations\\applicatondbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\migrations\\applicatondbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\migrations\\20250212015208_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\migrations\\20250212015208_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\warehouse-api_test.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\warehouse-api_test.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\users\\iibos\\desktop\\apidiblomarbeit\\warehouse-api_test\\warehouse-api_test\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\iIBoS\\source\\repos\\Hannibunn\\Warehouse-API\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212014327_Initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/MININT_SMH5KTQ_SQLEXPRESS03/UserMangmentAPI/True/SqlTable/dbo.Users.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\apikeys\\apikey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\apikeys\\apikey.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\apikeys\\apikey-middelware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\apikeys\\apikey-middelware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\migrations\\applicatondbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\migrations\\applicatondbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\migrations\\20250212015208_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\migrations\\20250212015208_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\data\\applicatondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\data\\applicatondbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\warehouse-api_test.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\warehouse-api_test.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\models\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -68,7 +68,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -76,85 +76,81 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LoginController.cs",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Controllers\\LoginController.cs",
-              "RelativeDocumentMoniker": "Warehouse-API_Test\\Controllers\\LoginController.cs",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Controllers\\LoginController.cs*",
-              "RelativeToolTip": "Warehouse-API_Test\\Controllers\\LoginController.cs*",
-              "ViewState": "AgIAADMAAAAAAAAAAAAowHkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T18:21:00.699Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ApiKey.cs",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey.cs",
-              "RelativeDocumentMoniker": "Warehouse-API_Test\\APIKEYS\\ApiKey.cs",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey.cs*",
-              "RelativeToolTip": "Warehouse-API_Test\\APIKEYS\\ApiKey.cs*",
-              "ViewState": "AgIAACoAAAAAAAAAAAAmwBQAAABOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T22:22:57.343Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Program.cs",
-              "RelativeDocumentMoniker": "Warehouse-API_Test\\Program.cs",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Program.cs",
-              "RelativeToolTip": "Warehouse-API_Test\\Program.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAuwDIAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T18:12:27.6Z",
+              "DocumentIndex": 1,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Warehouse-API_Test\\appsettings.Development.json",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\appsettings.Development.json",
+              "RelativeToolTip": "Warehouse-API_Test\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-02-24T11:06:29.179Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "Warehouse-API_Test\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "Warehouse-API_Test\\Controllers\\LoginController.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAgwBwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T18:21:00.699Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ApiKey.cs",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey.cs",
+              "RelativeDocumentMoniker": "Warehouse-API_Test\\APIKEYS\\ApiKey.cs",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey.cs",
+              "RelativeToolTip": "Warehouse-API_Test\\APIKEYS\\ApiKey.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAmwFAAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-20T22:22:57.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Program.cs",
+              "RelativeDocumentMoniker": "Warehouse-API_Test\\Program.cs",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Program.cs",
+              "RelativeToolTip": "Warehouse-API_Test\\Program.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAuwDIAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T18:12:27.6Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\appsettings.json",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\appsettings.json",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\appsettings.json",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\appsettings.json",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\appsettings.json",
               "RelativeToolTip": "Warehouse-API_Test\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-02-10T19:23:05.621Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ApiController.cs",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Controllers\\ApiController.cs",
-              "RelativeDocumentMoniker": "Warehouse-API_Test\\Controllers\\ApiController.cs",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Controllers\\ApiController.cs",
-              "RelativeToolTip": "Warehouse-API_Test\\Controllers\\ApiController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABSAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T22:50:18.859Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "ApiKey-Middelware.cs",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
               "RelativeToolTip": "Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA1wCUAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T22:35:00.346Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-20T22:35:00.346Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 3,
               "Title": "dbo.Users.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/MININT_SMH5KTQ_SQLEXPRESS03/UserMangmentAPI/True/SqlTable/dbo.Users.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/MININT_SMH5KTQ_SQLEXPRESS03/UserMangmentAPI/True/SqlTable/dbo.Users.sql",
@@ -163,11 +159,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "ApplicatonDbContextModelSnapshot.cs",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\ApplicatonDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\ApplicatonDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Migrations\\ApplicatonDbContextModelSnapshot.cs",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\ApplicatonDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\ApplicatonDbContextModelSnapshot.cs",
               "RelativeToolTip": "Warehouse-API_Test\\Migrations\\ApplicatonDbContextModelSnapshot.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -175,11 +171,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "20250212015208_Initial.cs",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212015208_Initial.cs",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212015208_Initial.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Migrations\\20250212015208_Initial.cs",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212015208_Initial.cs",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212015208_Initial.cs",
               "RelativeToolTip": "Warehouse-API_Test\\Migrations\\20250212015208_Initial.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -187,48 +183,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "ApplicatonDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Data\\ApplicatonDbContext.cs",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Data\\ApplicatonDbContext.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Data\\ApplicatonDbContext.cs",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Data\\ApplicatonDbContext.cs",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Data\\ApplicatonDbContext.cs",
               "RelativeToolTip": "Warehouse-API_Test\\Data\\ApplicatonDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T19:27:23.35Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-10T19:27:23.35Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\AuthService.cs",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\AuthService.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\AuthService.cs",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\AuthService.cs",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\AuthService.cs",
               "RelativeToolTip": "Warehouse-API_Test\\AuthService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-12T17:37:09.61Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-12T17:37:09.61Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 2,
               "Title": "20250212014327_Initial.cs",
               "DocumentMoniker": "C:\\Users\\iIBoS\\source\\repos\\Hannibunn\\Warehouse-API\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212014327_Initial.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\source\\repos\\Hannibunn\\Warehouse-API\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212014327_Initial.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Users\\iIBoS\\source\\repos\\Hannibunn\\Warehouse-API\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212014327_Initial.cs",
               "ToolTip": "C:\\Users\\iIBoS\\source\\repos\\Hannibunn\\Warehouse-API\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212014327_Initial.cs",
-              "RelativeToolTip": "..\\..\\..\\source\\repos\\Hannibunn\\Warehouse-API\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212014327_Initial.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Users\\iIBoS\\source\\repos\\Hannibunn\\Warehouse-API\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212014327_Initial.cs",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-12T01:43:27.093Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Warehouse-API_Test.csproj",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Warehouse-API_Test.csproj",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
               "RelativeToolTip": "Warehouse-API_Test\\Warehouse-API_Test.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
@@ -236,24 +230,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "Users.cs",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Models\\Users.cs",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Models\\Users.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Models\\Users.cs",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Models\\Users.cs",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Models\\Users.cs",
               "RelativeToolTip": "Warehouse-API_Test\\Models\\Users.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-12T01:39:33.163Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-12T01:39:33.163Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Properties\\launchSettings.json",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\iIBoS\\Desktop\\APIDiblomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Properties\\launchSettings.json",
               "RelativeToolTip": "Warehouse-API_Test\\Properties\\launchSettings.json",
               "ViewState": "AgIAABgAAAAAAAAAAAAAACoAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",

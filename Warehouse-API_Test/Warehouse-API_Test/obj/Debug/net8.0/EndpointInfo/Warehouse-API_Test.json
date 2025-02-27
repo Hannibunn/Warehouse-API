@@ -149,18 +149,6 @@
           }
         }
       }
-    },
-    "/api/Protected": {
-      "get": {
-        "tags": [
-          "Protected"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
     }
   },
   "components": {

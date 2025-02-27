@@ -86,15 +86,5 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "Warehouse_API_Test.Controllers.ProtectedController",
-    "Method": "GetProtectedData",
-    "RelativePath": "api/Protected",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
   }
 ]

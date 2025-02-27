@@ -1,0 +1,115 @@
+\documentclass[german,oneside,color]{htldipl}
+% Zulässige Class Options: 
+%   Hauptsprache: german (default), english
+%   Doppelseitig: oneside (default), twoside
+%   Syntax-Highlighting: color (default), black
+
+% die folgende Zeile einkommentieren für Arial-Ähnliche Schriftart
+%\renewcommand{\familydefault}{\sfdefault}
+
+\graphicspath{{images/}}    % Bilderverzeichnis
+
+\include{Settings}
+
+\makeglossaries
+\loadglsentries{glossary}					%beinhaltet Daten für das Glossar
+\addbibresource{literatur.bib}     %beinhaltet Daten für das Literaturverzeichnis
+
+%%%----------------------------------------------------------
+\begin{document}
+%%%----------------------------------------------------------
+%Einstellungen an die eigene Diplomarbeit anpassen
+\title{Sicherheit in eingebetteten Echtzeitsystemen}
+\abteilung{Elektronik und\\Technische Informatik}
+%\schwerpunkt{} wenn kein Ausbildungsschwerpunkt vorhanden ist z.B. Informatik
+\schwerpunkt{}
+\studienort{Mödling}
+\schule{HTBLuVA Mödling}
+\schullogo{htlmd0.jpg}
+\abgabejahr{2024/25}
+\betreuerA{Dr.\ Walter Turbo}
+%\betreuerB{} leer lassen wenn nicht vorhanden
+\betreuerB{}
+\betreuerC{}
+\betreuerD{}
+\schuelerA{Maximilian MAIER}
+\evidenzA{5AHEL-17}
+\subthemaA{Angriffsvektoren und Bedrohungsanalyse in eingebetteten Systemen}
+\schuelerB{Elisabeth MUSTER}
+\evidenzB{5AHEL-19}
+\subthemaB{Sichere Speicherverwaltung und Schutzmechanismen für Echtzeitsysteme}
+\schuelerC{Peter ZAPFEL}
+\evidenzC{5AHEL-24}
+\subthemaC{Kryptographische Verfahren zur Sicherung von Kommunikationsschnittstellen}
+\schuelerD{Otto BAUER}
+\evidenzD{5BHEL-02}
+\subthemaD{Absicherung von Firmware-Updates für Embedded Devices}
+%\schuelerE{} leer lassen wenn nicht vorhanden
+\schuelerE{}
+\evidenzE{}
+\subthemaE{}
+
+%%%----------------------------------------------------------
+\frontmatter
+\maketitle
+\tableofcontents
+%%%----------------------------------------------------------
+
+\include{vorwort}				%ggfs. weglassen
+\include{dokumentation}
+\include{kurzfassung}		
+\include{abstract}			
+
+%%%----------------------------------------------------------
+\mainmatter           %Hauptteil (ab hier arab. Seitenzahlen)
+%%%----------------------------------------------------------
+
+\include{einleitung}
+\include{diplomschrift}
+\include{latex}
+\include{faq}
+\include{abbildungen}
+\include{mathematik}
+\include{literatur}
+\include{drucken}
+\include{word}
+\include{schluss}
+
+%%%----------------------------------------------------------
+%%%Anhang
+\appendix
+%\include{anhang_a}	% Technische Ergänzungen
+\include{anhang_b}	% Inhalt der CD-ROM/DVD
+\include{anhang_c}	% Chronologische Liste der Änderungen
+\include{anhang_d}	% Quelltext dieses Dokuments
+
+%%%----------------------------------------------------------
+%Ausgabe der automatischen Zusatzdaten: Glossar, Index, Literaturverzeichnis
+\clearpage
+\printglossaries
+
+\clearpage
+\chapter*{Index}
+\addcontentsline{toc}{chapter}{Index}
+\printindex[allgemein]
+
+\printindex
+
+\printindex[name]
+
+\printindex[title]
+
+
+%Literaturverzeichnis
+\clearpage
+\addcontentsline{toc}{chapter}{\bibname}
+
+\printbibliography
+
+
+%%%----------------------------------------------------------
+
+%%%Messbox zur Druckkontrolle
+%\include{messbox}
+
+\end{document}
