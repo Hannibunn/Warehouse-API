@@ -23,7 +23,7 @@ Projektnummer : p245ay02
 * [Diplomarbeitstagebuch](./DATB)
 
 ## LaTeX
-
+* [Diplomschrift](Diplomschrift/_Diplomschrift.pdf)
 * [LaTeX-Vorlage für Diplomarbeiten](https://github.com/GuenterBurgstaller/Diplomarbeitsvorlage)
   * [LaTeX für Windows](https://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe) (TeX Live Installer)
   * [Texmaker](https://www.xm1math.net/texmaker/)
