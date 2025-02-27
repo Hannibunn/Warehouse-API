@@ -1,6 +1,6 @@
 # Diplomarbeitstagebuch
 
-* [VORLAGE](Vorlage.md)
+* [VORLAGE](VORLAGE.md)
 * [25-W09](2509.md)
 * [25-W10](2510.md)
 * [25-W11](2511.md)
