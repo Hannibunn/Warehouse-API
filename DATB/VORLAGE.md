@@ -3,38 +3,40 @@
 
 **__ Wochen bis zur Abgabe (01.09.2025) .**
 
-Kürzel: Rick Pleeging (*RP*), Ibrahim Hussein (*IH*), Hannes Prochaska (*HP*)
-
 ## Agenda
 
 * **Rick Pleeging**
-    * BLABLALBA
+    * Geplante Tätigkeiten
 
 * **Ibrahim Hussein**
-    * BLABLALBA
+    * Geplante Tätigkeiten
 
 * **Hannes Prochaska**
-    * BLABLALBA
+    * Geplante Tätigkeiten
 
 ## Ergebnisse
 
 * **Rick Pleeging**
-    * BLABLALBA
+    * Ergebnisse
 
 * **Ibrahim Hussein**
-    * BLABLALBA
+    * Ergebnisse
 
 * **Hannes Prochaska**
-    * BLABLALBA
+    * Ergebnisse
 
 ## Erledigte Tätigkeiten
 
 | Stunden | Person | Tätigkeit |
 | :-----: | :----: | :-------: |
-| __ | ___ | ___ |
+| 0 | Rick Pleeging | ___ |
+| 0 | Ibrahim Hussein | ___ |
+| 0 | Hannes Prochaska | ___ |
 
 ## Gesamtstundenzahl seit Beginn der Diplomarbeit
 
 | Stunden | Person | 180-h/Anzahl restlicher Wochen |
 | :-----: | :----: | :-------: |
-| __ | ___ | ___ |
+| 0 | Rick Pleeging | ___ |
+| 0 | Ibrahim Hussein | ___ |
+| 0 | Hannes Prochaska | ___ |
