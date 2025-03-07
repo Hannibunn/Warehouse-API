@@ -30,7 +30,7 @@ Projektnummer : p245ay03
 
 **Makros für Autorenkennzeichnung**
 
-````
+```latex
 %Makros für Autorenkennzeichnung
 \newcommand{\prh}{\marginpar{\scriptsize{\textit{$\rightarrow$Prochaska}}}}
 \newcommand{\plr}{\marginpar{\scriptsize{\textit{$\rightarrow$Pleeging}}}}
