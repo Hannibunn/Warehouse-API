@@ -4,7 +4,7 @@
 
 Abgabedatum der Diplomarbeit : 01.09.2025
 
-Projektnummer : p245ay02
+Projektnummer : p245ay03
 
 ### Projektteam:
 
@@ -27,3 +27,12 @@ Projektnummer : p245ay02
 * [LaTeX-Vorlage für Diplomarbeiten](https://github.com/GuenterBurgstaller/Diplomarbeitsvorlage)
   * [LaTeX für Windows](https://mirror.ctan.org/systems/texlive/tlnet/install-tl-windows.exe) (TeX Live Installer)
   * [Texmaker](https://www.xm1math.net/texmaker/)
+
+**Makros für Autorenkennzeichnung**
+
+```latex
+%Makros für Autorenkennzeichnung
+\newcommand{\prh}{\marginpar{\scriptsize{\textit{$\rightarrow$Prochaska}}}}
+\newcommand{\plr}{\marginpar{\scriptsize{\textit{$\rightarrow$Pleeging}}}}
+\newcommand{\hui}{\marginpar{\scriptsize{\textit{$\rightarrow$Hussein}}}}
+```
