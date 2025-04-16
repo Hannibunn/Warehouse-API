@@ -84,7 +84,8 @@
               "RelativeToolTip": "Warehouse-API_Test\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-02-24T11:06:29.179Z"
+              "WhenOpened": "2025-02-24T11:06:29.179Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -92,8 +93,8 @@
               "Title": "LoginController.cs",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Controllers\\LoginController.cs",
-              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Controllers\\LoginController.cs*",
-              "RelativeToolTip": "Warehouse-API_Test\\Controllers\\LoginController.cs*",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "Warehouse-API_Test\\Controllers\\LoginController.cs",
               "ViewState": "AgIAAF8AAAAAAAAAAAAqwGsAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-10T18:21:00.699Z",
@@ -109,7 +110,8 @@
               "RelativeToolTip": "Warehouse-API_Test\\APIKEYS\\ApiKey.cs",
               "ViewState": "AgIAADwAAAAAAAAAAAAmwFAAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T22:22:57.343Z"
+              "WhenOpened": "2025-02-20T22:22:57.343Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -121,7 +123,8 @@
               "RelativeToolTip": "Warehouse-API_Test\\Program.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAuwDIAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T18:12:27.6Z"
+              "WhenOpened": "2025-02-10T18:12:27.6Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -144,9 +147,10 @@
               "RelativeDocumentMoniker": "Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
               "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
               "RelativeToolTip": "Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAA1wCUAAAALAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwCUAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-20T22:35:00.346Z"
+              "WhenOpened": "2025-02-20T22:35:00.346Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -167,7 +171,8 @@
               "RelativeToolTip": "Warehouse-API_Test\\Migrations\\ApplicatonDbContextModelSnapshot.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-18T18:25:23.473Z"
+              "WhenOpened": "2025-02-18T18:25:23.473Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -179,7 +184,8 @@
               "RelativeToolTip": "Warehouse-API_Test\\Migrations\\20250212015208_Initial.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-18T18:25:22.164Z"
+              "WhenOpened": "2025-02-18T18:25:22.164Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -191,7 +197,8 @@
               "RelativeToolTip": "Warehouse-API_Test\\Data\\ApplicatonDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T19:27:23.35Z"
+              "WhenOpened": "2025-02-10T19:27:23.35Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -203,7 +210,8 @@
               "RelativeToolTip": "Warehouse-API_Test\\AuthService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-12T17:37:09.61Z"
+              "WhenOpened": "2025-02-12T17:37:09.61Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -226,7 +234,8 @@
               "RelativeToolTip": "Warehouse-API_Test\\Warehouse-API_Test.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-02-10T16:03:59.877Z"
+              "WhenOpened": "2025-02-10T16:03:59.877Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -238,7 +247,8 @@
               "RelativeToolTip": "Warehouse-API_Test\\Models\\Users.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-12T01:39:33.163Z"
+              "WhenOpened": "2025-02-12T01:39:33.163Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -248,9 +258,10 @@
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Properties\\launchSettings.json",
               "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Properties\\launchSettings.json",
               "RelativeToolTip": "Warehouse-API_Test\\Properties\\launchSettings.json",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACoAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAIBJwCoAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-02-12T17:39:38.707Z"
+              "WhenOpened": "2025-02-12T17:39:38.707Z",
+              "EditorCaption": ""
             }
           ]
         }

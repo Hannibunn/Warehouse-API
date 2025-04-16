@@ -523,3 +523,5 @@ C:\Hannes\SCHUL-Dokumente\5_6AAIFT\GITHUB-Diplomarbeit\Warehouse-API_Test\Wareho
 C:\Hannes\SCHUL-Dokumente\5_6AAIFT\GITHUB-Diplomarbeit\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\Warehouse-API_Test.pdb
 C:\Hannes\SCHUL-Dokumente\5_6AAIFT\GITHUB-Diplomarbeit\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\Warehouse-API_Test.genruntimeconfig.cache
 C:\Hannes\SCHUL-Dokumente\5_6AAIFT\GITHUB-Diplomarbeit\Warehouse-API_Test\Warehouse-API_Test\obj\Debug\net8.0\ref\Warehouse-API_Test.dll
+C:\Hannes\SCHUL-Dokumente\5_6AAIFT\GITHUB-Diplomarbeit\Warehouse-API_Test\Warehouse-API_Test\bin\Debug\net8.0\Npgsql.dll
+C:\Hannes\SCHUL-Dokumente\5_6AAIFT\GITHUB-Diplomarbeit\Warehouse-API_Test\Warehouse-API_Test\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
