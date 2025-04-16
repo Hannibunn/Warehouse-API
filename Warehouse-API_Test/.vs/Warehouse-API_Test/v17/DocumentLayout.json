@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\models\\warehousedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\models\\warehousedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|c:\\hannes\\schul-dokumente\\5_6aaift\\github-diplomarbeit\\warehouse-api_test\\warehouse-api_test\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5C3337F7-3743-4140-9B57-8AD788165796}|Warehouse-API_Test\\Warehouse-API_Test.csproj|solutionrelative:warehouse-api_test\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -75,8 +79,25 @@
               "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "WarehouseDbContext.cs",
+              "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Models\\WarehouseDbContext.cs",
+              "RelativeDocumentMoniker": "Warehouse-API_Test\\Models\\WarehouseDbContext.cs",
+              "ToolTip": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Models\\WarehouseDbContext.cs",
+              "RelativeToolTip": "Warehouse-API_Test\\Models\\WarehouseDbContext.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T15:33:31.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\appsettings.Development.json",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\appsettings.Development.json",
@@ -89,7 +110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "LoginController.cs",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Controllers\\LoginController.cs",
@@ -102,7 +123,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ApiKey.cs",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\APIKEYS\\ApiKey.cs",
@@ -115,7 +136,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Program.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Program.cs",
@@ -128,7 +149,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\appsettings.json",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\appsettings.json",
@@ -141,7 +162,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ApiKey-Middelware.cs",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\APIKEYS\\ApiKey-Middelware.cs",
@@ -154,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "dbo.Users.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/MININT_SMH5KTQ_SQLEXPRESS03/UserMangmentAPI/True/SqlTable/dbo.Users.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/MININT_SMH5KTQ_SQLEXPRESS03/UserMangmentAPI/True/SqlTable/dbo.Users.sql",
@@ -163,7 +184,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "ApplicatonDbContextModelSnapshot.cs",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\ApplicatonDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Migrations\\ApplicatonDbContextModelSnapshot.cs",
@@ -176,7 +197,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "20250212015208_Initial.cs",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212015208_Initial.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Migrations\\20250212015208_Initial.cs",
@@ -189,7 +210,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "ApplicatonDbContext.cs",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Data\\ApplicatonDbContext.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Data\\ApplicatonDbContext.cs",
@@ -202,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\AuthService.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\AuthService.cs",
@@ -215,7 +236,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "20250212014327_Initial.cs",
               "DocumentMoniker": "C:\\Users\\iIBoS\\source\\repos\\Hannibunn\\Warehouse-API\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212014327_Initial.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Users\\iIBoS\\source\\repos\\Hannibunn\\Warehouse-API\\Warehouse-API_Test\\Warehouse-API_Test\\Migrations\\20250212014327_Initial.cs",
@@ -226,7 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Warehouse-API_Test.csproj",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Warehouse-API_Test.csproj",
@@ -239,7 +260,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "Users.cs",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Models\\Users.cs",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Models\\Users.cs",
@@ -252,7 +273,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Warehouse-API_Test\\Properties\\launchSettings.json",
