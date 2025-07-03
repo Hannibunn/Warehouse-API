@@ -58,7 +58,7 @@ namespace Sets_API.APIKEYS
                 _apiKeys[key].RequestCount++;
 
 
-                if (_apiKeys[key].RequestCount >= 20)
+                if (_apiKeys[key].RequestCount >= 10)
                 {
                     newKey = GenerateApiKey();
                     _apiKeys.Remove(key);
