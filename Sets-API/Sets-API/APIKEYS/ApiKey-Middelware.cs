@@ -14,6 +14,15 @@
         public async Task InvokeAsync(HttpContext context)
         {
 
+            //  Wenn der Request zur "generate"-Route geht, API-Key-Prüfung überspringen
+            var path = context.Request.Path.Value?.ToLower();
+
+            if (path != null && path.Contains("/generate"))
+            {
+                await _next(context);
+                return;
+            }
+
             if (!context.Request.Headers.TryGetValue("X-Api-Key", out var extractedApiKey))
             {
                 context.Response.StatusCode = 401;

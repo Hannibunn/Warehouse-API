@@ -218,5 +218,43 @@ namespace Sets_API.Controller
 
         }
 
+        // Generate API Key Controller
+        [HttpPost("generate")]
+        public IActionResult GenerateApiKey()
+        {
+            var newKey = _apiKeyService.CreateApiKey();
+            return Ok(new { apiKey = newKey });
+        }
+
+        // Validate API Key Controller
+        [HttpPost("validate")]
+        public IActionResult ValidateApiKey([FromBody] string apiKey)
+        {
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                return BadRequest("API key is required.");
+            }
+            var isValid = _apiKeyService.ValidateApiKey(apiKey, out string newKey);
+            if (!isValid)
+            {
+                return Unauthorized("Invalid API key.");
+            }
+            if (newKey != null)
+            {
+                return Ok(new { message = "API key validated successfully.", newApiKey = newKey });
+            }
+            return Ok("API key validated successfully.");
+        }
+
+        // Get All API Keys Controller
+        [HttpGet("apikeys")]
+        public IActionResult GetAllApiKeys()
+        {
+            var apiKeys = _apiKeyService.GetAllApiKeys();
+            return Ok(apiKeys);
+        }
+
+  
+
     }
 }

@@ -117,8 +117,32 @@ namespace Warehouse_API_Test.Controllers
             }
             return Ok(new { message = "Erfolgreicher Zugriff auf geschützte Daten" });
         }
+        // Authentifizierung Controller mit email und API-Key
+        [HttpPost("authenticate")]
+        public IActionResult GetApiKeys()
+        {
+            var apiKey = Request.Headers["ApiKey"].ToString();
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                return Unauthorized("API key is required.");
+            }
+            if (!_apiKeyService.ValidateApiKey(apiKey, out string newKey))
+            {
+                return Unauthorized("Invalid API key.");
+            }
+            var email = Request.Headers["Email"].ToString();
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest("Email is required for authentication.");
+            }
+            var token = _authService.GenerateJwtToken(email);
+            return Ok(new { token, newApiKey = newKey });
 
-     
+        }
+
+
+
+
 
     }
 }

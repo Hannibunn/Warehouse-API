@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj": {}
+    "C:\\Users\\iIBoS\\Desktop\\SETSAPI\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj": {}
   },
   "projects": {
-    "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj": {
+    "C:\\Users\\iIBoS\\Desktop\\SETSAPI\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
+        "projectUniqueName": "C:\\Users\\iIBoS\\Desktop\\SETSAPI\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
         "projectName": "Warehouse-API_Test",
-        "projectPath": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
-        "packagesPath": "C:\\Users\\gproc\\.nuget\\packages\\",
-        "outputPath": "C:\\Hannes\\SCHUL-Dokumente\\5_6AAIFT\\GITHUB-Diplomarbeit\\Warehouse-API_Test\\Warehouse-API_Test\\obj\\",
+        "projectPath": "C:\\Users\\iIBoS\\Desktop\\SETSAPI\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
+        "packagesPath": "C:\\Users\\iIBoS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\iIBoS\\Desktop\\SETSAPI\\Warehouse-API_Test\\Warehouse-API_Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\gproc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\iIBoS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -43,7 +43,7 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "all"
+          "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.100"
       },
@@ -111,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
