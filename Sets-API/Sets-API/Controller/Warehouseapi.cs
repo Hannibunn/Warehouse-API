@@ -226,7 +226,7 @@ namespace Sets_API.Controller
             return Ok(new { apiKey = newKey });
         }
 
-        // Validate API Key Controller
+        // Ueberprüfung API Key Controller
         [HttpPost("validate")]
         public IActionResult ValidateApiKey([FromBody] string apiKey)
         {
