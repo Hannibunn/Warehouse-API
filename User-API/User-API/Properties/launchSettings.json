@@ -35,6 +35,14 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+
+      "Jwt": {
+        "Key": "Lion_is_it_you",
+        "Issuer": "https://localhost:7073",
+        "Audience": "https://localhost:7073",
+        "ExpiryMinutes": 1
+
       }
     }
   }

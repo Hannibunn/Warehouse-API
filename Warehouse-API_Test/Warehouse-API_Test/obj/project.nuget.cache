@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rH4zf6+5eOY=",
+  "dgSpecHash": "il1pO91rrPc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\iIBoS\\Desktop\\SETSAPI\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
+  "projectFilePath": "C:\\Users\\iIBoS\\Desktop\\UserApi\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\iIBoS\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\iIBoS\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
