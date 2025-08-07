@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\iIBoS\\Desktop\\UserApi\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj": {}
+    "C:\\Users\\iIBoS\\Desktop\\Userapis\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iIBoS\\Desktop\\UserApi\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj": {
+    "C:\\Users\\iIBoS\\Desktop\\Userapis\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iIBoS\\Desktop\\UserApi\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
+        "projectUniqueName": "C:\\Users\\iIBoS\\Desktop\\Userapis\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
         "projectName": "Warehouse-API_Test",
-        "projectPath": "C:\\Users\\iIBoS\\Desktop\\UserApi\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
+        "projectPath": "C:\\Users\\iIBoS\\Desktop\\Userapis\\Warehouse-API_Test\\Warehouse-API_Test\\Warehouse-API_Test.csproj",
         "packagesPath": "C:\\Users\\iIBoS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iIBoS\\Desktop\\UserApi\\Warehouse-API_Test\\Warehouse-API_Test\\obj\\",
+        "outputPath": "C:\\Users\\iIBoS\\Desktop\\Userapis\\Warehouse-API_Test\\Warehouse-API_Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

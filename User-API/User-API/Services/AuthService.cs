@@ -1,19 +1,25 @@
-﻿using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using BCrypt.Net;
+﻿using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
-
-namespace User_API
+namespace User_API.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly IConfiguration _configuration;
 
         public AuthService(IConfiguration configuration)
         {
             _configuration = configuration;
+        }
+        public int? GetUserIdFromToken(HttpContext context)
+        {
+            // Implementiere hier das Auslesen der UserId aus dem JWT im HttpContext
+            // z.B. aus ClaimsPrincipal
+            var userIdClaim = context.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (userIdClaim == null) return null;
+            return int.TryParse(userIdClaim.Value, out var userId) ? userId : null;
         }
 
         public string GenerateJwtToken(string email)
@@ -23,9 +29,9 @@ namespace User_API
 
             var claims = new[]
             {
-            new Claim(ClaimTypes.Name, email),
-            new Claim(ClaimTypes.Email, email),
-        };
+    new Claim(ClaimTypes.Name, email),
+    new Claim(ClaimTypes.Email, email),
+};
 
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature);
 
@@ -38,6 +44,15 @@ namespace User_API
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        public string HashPassword(string password)
+        {
+            return BCrypt.Net.BCrypt.HashPassword(password);
+        }
+
+        public bool VerifyPassword(string password, string hashedPassword)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
         }
     }
 }

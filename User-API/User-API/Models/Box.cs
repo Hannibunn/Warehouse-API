@@ -1,16 +1,24 @@
-﻿namespace User_API.Models
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace User_API.Models
 {
     public class Box
     {
-        public int Id { get; set; }
+        [Key]
+        public int ID { get; set; }
 
-        public string Label { get; set; } = string.Empty;
+        public int? StorageID { get; set; }
+        public Storage? Storage { get; set; }
 
-        // Optional: Welchem User gehört die Box? (falls du das speichern willst)
+        public ICollection<Set>? Sets { get; set; } = new List<Set>();
+
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public string? QRcode { get; set; }
+
+        // Box gehört einem User
         public int UserId { get; set; }
-        public Users User { get; set; }
-
-        // Navigation: Welche Sets sind in der Box?
-        public ICollection<UserSet> UserSets { get; set; } = new List<UserSet>();
+        public Users User { get; set; }   
     }
 }
