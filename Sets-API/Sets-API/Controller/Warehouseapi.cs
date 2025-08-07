@@ -50,20 +50,25 @@ namespace Sets_API.Controller
         [HttpGet("sets/barcode/{barcode}")]
         public async Task<ActionResult<Set>> GetSetByBarcode(string barcode)
         {
-
             var set = await _context.Sets
-                .FirstOrDefaultAsync(s => s.BarcodeEan == barcode);
+                .Include(s => s.Barcode)
+                .FirstOrDefaultAsync(s => s.Barcode != null && s.Barcode.EAN == barcode);
+
             if (set == null)
             {
                 set = await _context.Sets
-                    .FirstOrDefaultAsync(s => s.BarcodeUpc == barcode);
+                    .Include(s => s.Barcode)
+                    .FirstOrDefaultAsync(s => s.Barcode != null && s.Barcode.UPC == barcode);
             }
+
             if (set == null)
             {
                 return NotFound(new { message = "Kein Set mit diesem Barcode gefunden." });
             }
+
             return Ok(set);
         }
+
         // Neuer Sets Controller
         [HttpPost("sets")]
         public async Task<ActionResult<Set>> CreateSet([FromBody] Set set)
@@ -86,59 +91,64 @@ namespace Sets_API.Controller
                 return BadRequest("Ungültige Set-Daten.");
             }
 
-            var existingSet = await _context.Sets.FindAsync(id);
+            var existingSet = await _context.Sets
+                .Include(s => s.Barcode)
+                .Include(s => s.LEGOCom)
+                .Include(s => s.Image)
+                .Include(s => s.AgeRange)
+                .Include(s => s.Dimensions)
+                .Include(s => s.ExtendedData)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
             if (existingSet == null)
             {
                 return NotFound();
             }
-            // Alle Eigenschaften manuell aktualisieren
-            existingSet.BoxId = set.BoxId;
-            existingSet.Number = set.Number;
-            existingSet.NumberVariant = set.NumberVariant;
-            existingSet.Name = set.Name;
-            existingSet.Year = set.Year;
-            existingSet.Theme = set.Theme;
-            existingSet.ThemeGroup = set.ThemeGroup;
-            existingSet.Subtheme = set.Subtheme;
-            existingSet.Category = set.Category;
-            existingSet.Released = set.Released;
-            existingSet.Pieces = set.Pieces;
-            existingSet.Minifigs = set.Minifigs;
-            existingSet.ImageId = set.ImageId;
-            existingSet.ImageThumbnailUrl = set.ImageThumbnailUrl;
-            existingSet.ImageImageUrl = set.ImageImageUrl;
-            existingSet.LegocomId = set.LegocomId;
-            existingSet.LegocomUsRetailPrice = set.LegocomUsRetailPrice;
-            existingSet.LegocomUsDateFirstAvailable = set.LegocomUsDateFirstAvailable;
-            existingSet.LegocomUsDateLastAvailable = set.LegocomUsDateLastAvailable;
-            existingSet.LegocomUkRetailPrice = set.LegocomUkRetailPrice;
-            existingSet.LegocomUkDateFirstAvailable = set.LegocomUkDateFirstAvailable;
-            existingSet.LegocomUkDateLastAvailable = set.LegocomUkDateLastAvailable;
-            existingSet.LegocomCaRetailPrice = set.LegocomCaRetailPrice;
-            existingSet.LegocomCaDateFirstAvailable = set.LegocomCaDateFirstAvailable;
-            existingSet.LegocomCaDateLastAvailable = set.LegocomCaDateLastAvailable;
-            existingSet.LegocomDeRetailPrice = set.LegocomDeRetailPrice;
-            existingSet.LegocomDeDateFirstAvailable = set.LegocomDeDateFirstAvailable;
-            existingSet.LegocomDeDateLastAvailable = set.LegocomDeDateLastAvailable;
-            existingSet.PackagingType = set.PackagingType;
-            existingSet.Availability = set.Availability;
-            existingSet.InstructionsCount = set.InstructionsCount;
-            existingSet.AgeRangeId = set.AgeRangeId;
-            existingSet.AgeRangeMin = set.AgeRangeMin;
-            existingSet.AgeRangeMax = set.AgeRangeMax;
-            existingSet.DimensionsHeight = set.DimensionsHeight;
-            existingSet.DimensionsWidth = set.DimensionsWidth;
-            existingSet.DimensionsDepth = set.DimensionsDepth;
-            existingSet.DimensionsWeight = set.DimensionsWeight;
-            existingSet.BarcodeEan = set.BarcodeEan;
-            existingSet.BarcodeUpc = set.BarcodeUpc;
-            existingSet.ExtendedDataBrickTags = set.ExtendedDataBrickTags;
-            // Beziehung zu Box (optional, je nach Datenmodell)
-            existingSet.Box = set.Box;
+
+            // Primitive Werte
+            existingSet.setID = set.setID;
+            existingSet.boxID = set.boxID;
+            existingSet.number = set.number;
+            existingSet.numberVariant = set.numberVariant;
+            existingSet.name = set.name;
+            existingSet.year = set.year;
+            existingSet.theme = set.theme;
+            existingSet.themeGroup = set.themeGroup;
+            existingSet.subTheme = set.subTheme;
+            existingSet.category = set.category;
+            existingSet.released = set.released;
+            existingSet.pieces = set.pieces;
+            existingSet.minifigs = set.minifigs;
+            existingSet.packagingType = set.packagingType;
+            existingSet.availability = set.availability;
+            existingSet.instructionsCount = set.instructionsCount;
+
+            // Objekt: Barcode
+            existingSet.Barcode = set.Barcode;
+
+            // Objekt: LEGOCom
+            existingSet.LEGOCom = set.LEGOCom;
+
+            // Objekt: Image
+            existingSet.Image = set.Image;
+
+            // Objekt: AgeRange
+            existingSet.AgeRange = set.AgeRange;
+
+            // Objekt: Dimensions
+            existingSet.Dimensions = set.Dimensions;
+
+            // Objekt: ExtendedData
+            existingSet.ExtendedData = set.ExtendedData;
+
+            // Beziehung zu Box (optional, falls relevant)
+            existingSet.box = set.box;
+
             _context.Sets.Update(existingSet);
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
         // Löschen eines Sets
         [HttpDelete("sets/{id}")]
         public async Task<IActionResult> DeleteSet(int id)
@@ -163,7 +173,7 @@ namespace Sets_API.Controller
         [HttpGet("boxes/{id}")]
         public async Task<ActionResult<Box>> GetBoxById(int id)
         {
-            var box = await _context.Boxes.Include(b => b.Sets).FirstOrDefaultAsync(b => b.Id == id);
+            var box = await _context.Boxes.Include(b => b.Sets).FirstOrDefaultAsync(b => b.ID == id);
             if (box == null)
             {
                 return NotFound();
@@ -180,14 +190,14 @@ namespace Sets_API.Controller
             }
             _context.Boxes.Add(box);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetBoxById), new { id = box.Id }, box);
+            return CreatedAtAction(nameof(GetBoxById), new { id = box.ID }, box);
         }
         // Aktualisieren einer Box
         [HttpPut("boxes/{id}")]
         public
             async Task<IActionResult> UpdateBox(int id, [FromBody] Box box)
         {
-            if (box == null || box.Id != id)
+            if (box == null || box.ID != id)
             {
                 return BadRequest("Ungültige Box-Daten.");
             }
@@ -198,7 +208,7 @@ namespace Sets_API.Controller
             }
             existingBox.Name = box.Name;
             existingBox.Description = box.Description;
-            existingBox.Qrcode = box.Qrcode;
+            existingBox.QRcode = box.QRcode;
             _context.Boxes.Update(existingBox);
             await _context.SaveChangesAsync();
             return NoContent();
@@ -253,6 +263,7 @@ namespace Sets_API.Controller
             var apiKeys = _apiKeyService.GetAllApiKeys();
             return Ok(apiKeys);
         }
+    
 
   
 

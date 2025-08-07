@@ -8,6 +8,10 @@ namespace Sets_API.Data
     public partial class ApplicationDbContext:DbContext
     {
         public ApplicationDbContext()
+        public DbSet<Set> Sets { get; set; }
+        public DbSet<Box> Boxes { get; set; }
+
+        public ApplicationDbContext()
         {
         }
 
@@ -15,59 +19,106 @@ namespace Sets_API.Data
             : base(options)
         {
         }
-        public DbSet<Models.Box> Boxes { get; set; }
-        public DbSet<Models.Set> Sets { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=warehouse;Username=postgres;Password=Lion");
+        => optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=setsdb;Username=postgres;Password=Lion");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Models.Box>(entity =>
-            {
-                entity.HasKey(e => e.Id).HasName("Box_pkey");
-                entity.ToTable("Box");
-                entity.Property(e => e.Qrcode).HasColumnName("QRcode");
-            });
-            modelBuilder.Entity<Models.Set>(entity =>
-            {
-                entity.HasKey(e => e.Id).HasName("Sets_pkey");
-                entity.HasKey(e => e.Id).HasName("Sets_pkey");
+            modelBuilder.Entity<Set>()
+                .HasIndex(s => s.number);
 
-                entity.HasIndex(e => e.BoxId, "IX_Sets_BoxID");
+            modelBuilder.Entity<Set>()
+                .HasIndex(s => s.name);
 
-                entity.Property(e => e.AgeRangeId).HasColumnName("AgeRange_Id");
-                entity.Property(e => e.AgeRangeMax).HasColumnName("AgeRange_Max");
-                entity.Property(e => e.AgeRangeMin).HasColumnName("AgeRange_Min");
-                entity.Property(e => e.BarcodeEan).HasColumnName("Barcode_EAN");
-                entity.Property(e => e.BarcodeUpc).HasColumnName("Barcode_UPC");
-                entity.Property(e => e.BoxId).HasColumnName("BoxID");
-                entity.Property(e => e.DimensionsDepth).HasColumnName("Dimensions_Depth");
-                entity.Property(e => e.DimensionsHeight).HasColumnName("Dimensions_Height");
-                entity.Property(e => e.DimensionsWeight).HasColumnName("Dimensions_Weight");
-                entity.Property(e => e.DimensionsWidth).HasColumnName("Dimensions_Width");
-                entity.Property(e => e.ExtendedDataBrickTags).HasColumnName("ExtendedData_BrickTags");
-                entity.Property(e => e.ImageId).HasColumnName("Image_Id");
-                entity.Property(e => e.ImageImageUrl).HasColumnName("Image_ImageURL");
-                entity.Property(e => e.ImageThumbnailUrl).HasColumnName("Image_ThumbnailURL");
-                entity.Property(e => e.LegocomCaDateFirstAvailable).HasColumnName("LEGOCom_CA_DateFirstAvailable");
-                entity.Property(e => e.LegocomCaDateLastAvailable).HasColumnName("LEGOCom_CA_DateLastAvailable");
-                entity.Property(e => e.LegocomCaRetailPrice).HasColumnName("LEGOCom_CA_RetailPrice");
-                entity.Property(e => e.LegocomDeDateFirstAvailable).HasColumnName("LEGOCom_DE_DateFirstAvailable");
-                entity.Property(e => e.LegocomDeDateLastAvailable).HasColumnName("LEGOCom_DE_DateLastAvailable");
-                entity.Property(e => e.LegocomDeRetailPrice).HasColumnName("LEGOCom_DE_RetailPrice");
-                entity.Property(e => e.LegocomId).HasColumnName("LEGOCom_Id");
-                entity.Property(e => e.LegocomUkDateFirstAvailable).HasColumnName("LEGOCom_UK_DateFirstAvailable");
-                entity.Property(e => e.LegocomUkDateLastAvailable).HasColumnName("LEGOCom_UK_DateLastAvailable");
-                entity.Property(e => e.LegocomUkRetailPrice).HasColumnName("LEGOCom_UK_RetailPrice");
-                entity.Property(e => e.LegocomUsDateFirstAvailable).HasColumnName("LEGOCom_US_DateFirstAvailable");
-                entity.Property(e => e.LegocomUsDateLastAvailable).HasColumnName("LEGOCom_US_DateLastAvailable");
-                entity.Property(e => e.LegocomUsRetailPrice).HasColumnName("LEGOCom_US_RetailPrice");
+            modelBuilder.Entity<Set>()
+                .OwnsOne(s => s.Image);
 
-                entity.HasOne(d => d.Box).WithMany(p => p.Sets).HasForeignKey(d => d.BoxId);
+            modelBuilder.Entity<Set>()
+               .OwnsOne(s => s.Barcode);
 
-            });
+            modelBuilder.Entity<Set>()
+               .OwnsOne(s => s.Dimensions);
+
+            modelBuilder.Entity<Set>()
+              .OwnsOne(s => s.AgeRange);
+
+            modelBuilder.Entity<Set>()
+               .OwnsOne(s => s.ExtendedData);
+
+            modelBuilder.Entity<Set>()
+               .OwnsOne(s => s.LEGOCom);
+
+            modelBuilder.Entity<Set>()
+               .OwnsOne(s => s.LEGOCom, legoCom =>
+               {
+                   // Configure owned entities
+                   legoCom.OwnsOne(lc => lc.US);
+                   legoCom.OwnsOne(lc => lc.UK);
+                   legoCom.OwnsOne(lc => lc.CA);
+                   legoCom.OwnsOne(lc => lc.DE);
+               });
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.Number)
+            //    .IsRequired()
+            //    .HasMaxLength(20);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.Name)
+            //    .IsRequired()
+            //    .HasMaxLength(200);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.Theme)
+            //    .HasMaxLength(100);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.ThemeGroup)
+            //    .HasMaxLength(100);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.SubTheme)
+            //    .HasMaxLength(100);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.Category)
+            //    .HasMaxLength(100);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.PackagingType)
+            //    .HasMaxLength(50);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.Category)
+            //    .HasMaxLength(100);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.Availability)
+            //    .HasMaxLength(50);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.InstructionsCount)
+            //    .HasDefaultValue(0);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.Year)
+            //    .HasDefaultValue(DateTime.Now.Year);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.Released)
+            //    .HasDefaultValue(true);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.Pieces)
+            //    .HasDefaultValue(0);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.Minifigs)
+            //    .HasDefaultValue(0);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.NumberVariant)
+            //    .HasDefaultValue(0);
+            //modelBuilder.Entity<Set>()
+            //    .Property(s => s.SetID)
+            //    .ValueGeneratedOnAddOrUpdate()
+            //    .HasDefaultValue(null);
+            //modelBuilder.Entity<Set>()
+            //    .HasOne(s => s.Box)
+            //    .WithMany(b => b.Sets)
+            //    .HasForeignKey(s => s.BoxID)
+            //    .OnDelete(DeleteBehavior.SetNull);
+
+            //modelBuilder.Entity<Set>()
+            //    .HasKey(s => s.ID);
+
             OnModelCreatingPartial(modelBuilder);
         }
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
