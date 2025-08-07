@@ -7,7 +7,7 @@ namespace Sets_API.Data
 {
     public partial class ApplicationDbContext:DbContext
     {
-        public ApplicationDbContext()
+    
         public DbSet<Set> Sets { get; set; }
         public DbSet<Box> Boxes { get; set; }
 
