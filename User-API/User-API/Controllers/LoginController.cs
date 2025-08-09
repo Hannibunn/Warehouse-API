@@ -94,7 +94,7 @@ namespace User_API.Controllers
 
             return Ok("Benutzer erfolgreich registriert!");
         }
-
+        // Alle User abrufen
         [HttpGet("users")]
         public async Task<ActionResult<IEnumerable<Users>>> GetAllUsers()
         {
@@ -108,13 +108,14 @@ namespace User_API.Controllers
             return Ok(new { apiKey = newKey });
         }
 
-
+        // Alle API-Keys abrufen
         [HttpGet("apikeys")]
         public IActionResult GetAllApiKeys()
         {
             var apiKeys = _apiKeyService.GetAllApiKeys();
             return Ok(apiKeys);
         }
+        // Admin API-Key abrufen
 
         [HttpGet("protected-endpoint")]
         public IActionResult GetProtectedData([FromHeader(Name = "X-Api-Key")] string apiKey)
@@ -149,6 +150,26 @@ namespace User_API.Controllers
             var token = _authService.GenerateJwtToken(email);
             return Ok(new { token, newApiKey = newKey });
 
+        }
+ 
+        // Ueberprüfung API Key Controller
+        [HttpPost("validate")]
+        public IActionResult ValidateApiKey([FromBody] string apiKey)
+        {
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                return BadRequest("API key is required.");
+            }
+            var isValid = _apiKeyService.ValidateApiKey(apiKey, out string newKey);
+            if (!isValid)
+            {
+                return Unauthorized("Invalid API key.");
+            }
+            if (newKey != null)
+            {
+                return Ok(new { message = "API key validated successfully.", newApiKey = newKey });
+            }
+            return Ok("API key validated successfully.");
         }
 
         //  Alle Boxen eines Users holen
