@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Warehouse-Api</title>
+  <style>
+    :root{
+      --bg: #f0e9e1;
+      --ink: #1a1a1a;
+      --hero-bg: #cfd0d1;
+      --footer-bg: #1a1a1a;
+      --footer-ink: #fff;
+      --sale: #d26b4b;
+      --line: rgba(0,0,0,.08);
+    }
+    html, body { margin:0; padding:0; font-family: system-ui, sans-serif; color:var(--ink); }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+    /* Header */
+    .header { background: var(--bg); border-bottom: 1px solid var(--line); position:sticky; top:0; z-index:10; }
+    .header-inner { display:flex; align-items:center; gap:16px; padding:16px 0; flex-wrap:wrap; }
+    .brand { display:flex; align-items:center; gap:12px; font-weight:700; }
+    .brand img { width:36px; height:36px; }
+    .search { flex: 1 1 200px; height:40px; background:#fff; border-radius:4px; box-shadow: inset 0 0 0 1px var(--line); }
+    .nav { display:flex; gap:16px; font-weight:600; letter-spacing:.02em; flex-wrap:wrap; }
+    .spacer { flex:1; }
+    .icons { display:flex; gap:8px; }
+    .icons .icon { width:28px; height:39px; border-radius:50%; display:grid; place-items:center; }
+
+    /* Hero */
+    .hero { background: var(--hero-bg); }
+    .hero-inner { position:relative; min-height: 420px; padding:50px 0; }
+    .title { position:relative; z-index:2; max-width: 520px; font-weight:800; line-height:0.8; }
+    .title .line1, .title .line2 { font-size: clamp(48px, 4vw, 110px); }
+    .title .line2 { margin-top: 12px; }
+    .img-kids { position:absolute; bottom:0; right:20%; max-width: 50%; height:auto; z-index:1; }
+    .img-woman { position:absolute; top:-40px; right:-20%; max-width: 25%; height:auto; z-index:1; }
+
+    /* Sets */
+    .section-cards, .section-products, .section-team { background: var(--bg); padding:40px 0; }
+    .cards-inner { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:20px; }
+    .card img { width:100%; height:80%; display:block; object-fit:cover; }
+    .card-title { text-align:center; padding:8px; font-weight:600; }
+
+    /* Products */
+    .products-title { text-align:center; font-weight:600; margin-bottom:24px; }
+    .products-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:16px; }
+    .product { text-align:center; }
+    .product img { width:100%; height:90%; display:block; object-fit:contain; background:#d9dbdd; }
+    .product-name { font-weight:600; margin-top:8px; }
+    .product-price { color:var(--sale); font-weight:600; }
+    .product-oldprice { color:#999; text-decoration:line-through; font-size:0.9em; margin-left:4px; }
+
+    /* Team base grid */
+    .team-inner { display:grid; grid-template-columns: repeat(auto-fit, minmax(540px, 1fr)); gap:24px; }
+
+    /* --- Team 3D Cards + animierter Hintergrund --- */
+    .section-team { position: relative; overflow: hidden; }
+    .section-team::before{
+      content:""; position:absolute; inset:-20%;
+      background:
+        radial-gradient(1200px 800px at 10% 20%, rgba(255,255,255,.06), transparent 60%),
+        radial-gradient(1000px 700px at 90% 80%, rgba(255,255,255,.05), transparent 60%),
+        linear-gradient(135deg, #dcd7cf 0%, #ece6de 40%, #f0e9e1 100%);
+      filter: saturate(1.05);
+      animation: team-bg-move 10s linear infinite alternate;
+      z-index:0;
+    }
+    @keyframes team-bg-move{ 0%{ transform: translate3d(0,0,0) scale(1); } 100%{ transform: translate3d(-4%, -3%, 0) scale(1.03); } }
+    .team-inner{ position:relative; z-index:1; perspective: 1200px; }
+
+    .team-card{ position:relative; height: 720px; border-radius:16px; transform-style:preserve-3d; transition: transform .8s cubic-bezier(.2,.7,.2,1); cursor:pointer; }
+    .team-card.is-rotated{ transform: rotateY(180deg); }
+    .team-face{ position:absolute; inset:0; backface-visibility:hidden; border-radius:16px; overflow:hidden; box-shadow:0 10px 28px rgba(0,0,0,.12); }
+
+    /* Front */
+    .team-face.front img{ width:100%; height:100%; object-fit:cover; }
+
+    /* Back themes */
+    .team-card[data-theme]{ --c1:#6d5dfc; --c2:#b983ff; --c3:#ffd6ff; }
+    .team-card[data-theme="violet"]  { --c1:#6d5dfc; --c2:#b983ff; --c3:#ffd6ff; }
+    .team-card[data-theme="teal"]    { --c1:#00c2a8; --c2:#78ffd6; --c3:#e0fff7; }
+    .team-card[data-theme="sunset"]  { --c1:#ff7a59; --c2:#ffb27a; --c3:#ffe7a1; }
+
+    .team-face.back{
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, var(--c1), var(--c2), var(--c3));
+      background-size: 200% 200%;
+      animation: gradientShift 12s ease infinite;
+      color:#111;
+      position: relative;
+      display:flex; flex-direction:column; justify-content:center;
+      padding:28px;
+    }
+    .team-face.back h3{ margin:0 0 12px 0; font-size:28px; }
+    .team-face.back p{ margin:0 0 14px 0; opacity:.85; }
+    .team-face.back ul{ margin:0; padding-left:18px; line-height:1.6; }
+
+    /* schwebende Punkte */
+    .team-face.back::before{
+      content:""; position:absolute; inset:-10%;
+      background:
+        radial-gradient(rgba(255,255,255,.18) 1px, transparent 2px) 0 0/22px 22px,
+        radial-gradient(rgba(0,0,0,.06) 1px, transparent 2px) 11px 11px/22px 22px;
+      animation: floatDots 20s linear infinite; mix-blend-mode: soft-light; pointer-events:none;
+    }
+    /* Glanz-Sweep */
+    .team-face.back::after{
+      content:""; position:absolute; inset:0;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.18) 50%, transparent 60%);
+      transform: translateX(-120%);
+      animation: sheen 4.5s ease-in-out infinite; pointer-events:none;
+    }
+
+    @keyframes gradientShift{ 0%{ background-position: 0% 50%; } 50%{ background-position: 100% 50%; } 100%{ background-position: 0% 50%; } }
+    @keyframes floatDots{ 0%{ transform: translate3d(0,0,0) scale(1); } 100%{ transform: translate3d(-6%, -4%, 0) scale(1.04); } }
+    @keyframes sheen{ 0%,70%{ transform: translateX(-120%); } 100%{ transform: translateX(120%); } }
+
+    .team-placeholder{ background: repeating-linear-gradient(45deg,#e6e6e6 0 14px,#dedede 14px 28px); }
+
+    @media (max-width: 900px){ .team-card{ height: 420px; } }
+
+    /* Footer */
+    footer { background: var(--footer-bg); color: var(--footer-ink); padding:40px 0 20px; }
+    .footer-inner { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:20px; }
+    .footer-brand { display:flex; flex-direction:column; gap:8px; }
+    .footer-brand img { width:40px; height:40px; }
+    .footer-input { display:flex; flex-wrap:wrap; gap:8px; }
+    .footer-input input { flex:1; padding:8px; border:none; border-radius:4px; }
+    .footer-input button { background:#b48b68; color:#fff; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; }
+    .footer-col h4 { margin-bottom:8px; font-weight:600; }
+    .footer-col ul { list-style:none; padding:0; margin:0; }
+    .footer-col ul li { margin-bottom:4px; }
+    .footer-social { text-align:center; margin-top:20px; }
+    .footer-social a { margin:0 4px; color: var(--footer-ink); text-decoration:none; font-size:20px; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="Picture/logo.png" alt="Logo" />
+        <div>Warehouse-Api</div>
+      </div>
+      <div class="search" role="search"></div>
+      <nav class="nav" aria-label="Main">
+        <a href="versuch.html">HOME</a>
+        <a href="Sets.html">SETS</a>
+        <a href="Box.html">BOX</a>
+      </nav>
+      <div class="spacer"></div>
+      <div class="icons">
+        <div class="icon"><img style="height: 60%;height:23px" src="Picture/searchicon.png" alt=""></div>
+        <div class="icon" aria-label="User"><a href="Login.html"><img style="height: 60%;" src="Picture/usericon.png" alt=""></a></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="title">
+          <div class="line1">Warehouses</div>
+          <div class="line2">API</div>
+        </div>
+        <img class="img-kids" src="Picture/image 2.png" alt="Kinder Illustration" />
+        <img class="img-woman" src="Picture/image 1840.png" alt="Frau Illustration" />
+      </div>
+    </section>
+
+    <!-- Sets -->
+    <section class="section-cards">
+      <div class="container cards-inner">
+        <div class="card">
+          <img src="Picture/image 17.png" alt="Star Wars" />
+          <div class="card-title">STAR WARS →</div>
+        </div>
+        <div class="card">
+          <img src="Picture/image 23.png" alt="LEGO Ninjago" />
+          <div class="card-title">LEGO NINJAGO →</div>
+        </div>
+        <div class="card">
+          <img src="Picture/image 25.png" alt="Marvel" />
+          <div class="card-title">MARVEL →</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="section-products">
+      <div class="container products-inner">
+        <div class="products-title">OTHER YOU MAYBE WOULD LIKE</div>
+        <div class="products-grid">
+          <div class="product">
+            <img src="Picture/image 26.png" alt="Produkt 1" />
+            <div class="product-name">ECLIPSE LINEN GOWN</div>
+            <div><span class="product-price">$300.50</span><span class="product-oldprice">$320.50</span></div>
+          </div>
+          <div class="product">
+            <img src="Picture/image 27.png" alt="Produkt 2" />
+            <div class="product-name">ECLIPSE LINEN GOWN</div>
+            <div><span class="product-price">$300.50</span><span class="product-oldprice">$320.50</span></div>
+          </div>
+          <div class="product">
+            <img src="Picture/image 28.png" alt="Produkt 3" />
+            <div class="product-name">ECLIPSE LINEN GOWN</div>
+            <div><span class="product-price">$300.50</span><span class="product-oldprice">$320.50</span></div>
+          </div>
+          <div class="product">
+            <img src="Picture/image 29.png" alt="Produkt 4" />
+            <div class="product-name">ECLIPSE LINEN GOWN</div>
+            <div><span class="product-price">$300.50</span><span class="product-oldprice">$320.50</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team mit Flip-Effekt und animierten Rückseitenfarben -->
+    <section class="section-team">
+      <div class="container team-inner">
+        <!-- Hannes -->
+        <div class="team-card" data-theme="violet" tabindex="0" aria-label="Hannes Porhacka Karte drehen">
+          <div class="team-face front">
+            <img src="Picture/image 32.png" alt="Hannes Porhacka">
+          </div>
+          <div class="team-face back">
+            <h3>Hannes Porhacka</h3>
+            <p>Entwicklung</p>
+            <ul>
+              <li>Frontend Komponenten</li>
+              <li>UI Prototypen</li>
+              <li>Performance Tuning</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Ibrahim -->
+        <div class="team-card" data-theme="teal" tabindex="0" aria-label="Ibrahim Hussein Karte drehen">
+          <div class="team-face front">
+            <img src="Picture/image 31.png" alt="Ibrahim Hussein">
+          </div>
+          <div class="team-face back">
+            <h3>Ibrahim Hussein</h3>
+            <p>API und Flows</p>
+            <ul>
+              <li>Programmierung von API</li>
+              <li>Testen von API</li>
+              <li>Erstellung von Flows</li>
+              <li>Design und Website</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Placeholder -->
+        <div class="team-card" data-theme="sunset" tabindex="0" aria-label="Platzhalter Karte drehen">
+          <div class="team-face front team-placeholder" aria-hidden="true"></div>
+          <div class="team-face back">
+            <h3>Dein Name</h3>
+            <p>Rolle</p>
+            <ul>
+              <li>Aufgabe 1</li>
+              <li>Aufgabe 2</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Illustration ohne Flip -->
+        <div class="team-member">
+          <img src="Picture/image 1841.png" alt="Illustration">
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="brand"><img src="Picture/logo.png" alt="Logo" /><div>Warehouse-Api</div></div>
+        <div class="footer-input"><input type="email" placeholder="Enter Email Address" /><button>Sign Up</button></div>
+        <div>Contact Info<br>Some random address, Greater London NW1 8JR, UK</div>
+      </div>
+      <div class="footer-col">
+        <h4>CATEGORIES</h4>
+        <ul><li>Starwars</li><li>Marvel</li><li>Ninjago</li><li>Harrypotter</li><li>And more</li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>CUSTOMER CARE</h4>
+        <ul><li>My Account</li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>PAGES</h4>
+        <ul><li>Sets</li><li>Box</li><li>Home</li><li>Sign in</li><li>Register</li></ul>
+      </div>
+    </div>
+    <div class="footer-social"><a href="#" aria-label="Facebook">F</a><a href="#" aria-label="Instagram">I</a><a href="#" aria-label="Twitter">T</a></div>
+  </footer>
+
+  <script>
+    // Flip via Klick oder Enter/Space, Größe bleibt konstant
+    function toggle(card){ card.classList.toggle('is-rotated'); }
+    document.querySelectorAll('.team-card').forEach(card=>{
+      card.addEventListener('click', ()=>toggle(card));
+      card.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(card); } });
+    });
+  </script>
+</body>
+</html>
