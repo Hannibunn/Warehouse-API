@@ -37,5 +37,8 @@ namespace Sets_API.Models
         /// Gets or sets the QR-ode associated with the box.
         /// </summary>
         public string? QRcode { get; set; }
+        // Box gehört einem User
+        public int UserId { get; set; }
+        public Users User { get; set; }
     }
 }
