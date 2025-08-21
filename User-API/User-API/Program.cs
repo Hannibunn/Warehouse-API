@@ -10,61 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using User_API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-// Füge Benutzergeheimnisse hinzu
-builder.Configuration.AddUserSecrets<Program>();
-
-// Lese die JWT-Einstellungen aus der Konfiguration
-var jwtSettings = builder.Configuration.GetSection("Jwt");
-var key = Encoding.UTF8.GetBytes(jwtSettings["Key"] ?? throw new ArgumentNullException("Jwt:Key is missing"));
-
-// Datenbank-Verbindungszeichenfolge
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-// Füge AuthService als Singleton hinzu
-builder.Services.AddSingleton<AuthService>();
-
-// connection for the database with posqre 
-builder.Services.AddDbContext<ApplicatonDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// Konfiguriere die JWT-Authentifizierung
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false;
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = true,
-        ValidIssuer = jwtSettings["Issuer"],
-        ValidateAudience = true,
-        ValidAudience = jwtSettings["Audience"],
-        ValidateLifetime = true,
-        ClockSkew = TimeSpan.Zero
-    };
-});
-
-// Registriere API-Key-Service als Singleton
-builder.Services.AddSingleton<ApiKey>();
-
-// Füge Authorization und Controller hinzu
-builder.Services.AddAuthorization();
+// Add services
 builder.Services.AddControllers();
 
-// Füge Swagger für die API-Dokumentation hinzu
+// Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -91,23 +40,89 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
+
+// User secrets
+builder.Configuration.AddUserSecrets<Program>();
+
+// JWT Settings
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+var key = Encoding.UTF8.GetBytes(jwtSettings["Key"] ?? throw new ArgumentNullException("Jwt:Key is missing"));
+
+// Database connection (PostgreSQL)
+builder.Services.AddDbContext<ApplicatonDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// AuthService & API-Key Service
+builder.Services.AddSingleton<AuthService>();
+builder.Services.AddSingleton<ApiKey>();
+
+// JWT Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = true,
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidateAudience = true,
+        ValidAudience = jwtSettings["Audience"],
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
+// Authorization
+builder.Services.AddAuthorization();
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMyWebsite", policy =>
+    {
+        policy.WithOrigins("https://hannibunn.github.io/Warehouse-API/e")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Swagger in Development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-// Die API - Key Middleware kommt direkt nach UseRouting und vor Authentication und Authorization
-app.UseMiddleware<ApiKey_Middelware>();   // API-Key Middleware zuerst
 
-
+// HTTPS & Routing
 app.UseHttpsRedirection();
+app.UseRouting();
 
+// API-Key Middleware, außer Login/Register
+app.UseWhen(context =>
+    !context.Request.Path.StartsWithSegments("/api/Anmelden/login") &&
+    !context.Request.Path.StartsWithSegments("/api/Anmelden/register"),
+    appBuilder =>
+    {
+        appBuilder.UseMiddleware<ApiKey_Middelware>();
+    });
+
+// Auth & Authorization
+app.UseAuthentication();
 app.UseAuthorization();
-// Weitere Middleware
-app.UseHttpsRedirection();
+
+// CORS
+app.UseCors("AllowMyWebsite");
+
+// Map Controllers
 app.MapControllers();
 
 app.Run();

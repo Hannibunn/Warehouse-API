@@ -25,11 +25,11 @@ namespace User_API.Controllers
     {
         private readonly AuthService _authService;
         private readonly ApplicatonDbContext _context;
-        private readonly ApiKey _apiKeyService;
+        private readonly ApiKey? _apiKeyService;
         private readonly IBoxService _boxService;
       
 
-        public LoginController(ApplicatonDbContext context, AuthService authService, ApiKey apiKeyService)
+        public LoginController(ApplicatonDbContext context, AuthService authService, ApiKey? apiKeyService = null)
         {
             _context = context;
             _authService = authService;
@@ -41,33 +41,33 @@ namespace User_API.Controllers
         public IActionResult Login([FromBody] Users request)
         {
             if (request == null)
-            {
                 return BadRequest("Anfrage ist leer!");
-            }
 
             if (string.IsNullOrEmpty(request.Email))
-            {
                 return BadRequest("E-Mail ist erforderlich!");
-            }
 
             var user = _context.Users.FirstOrDefault(u => u.Email == request.Email);
             if (user == null)
-            {
                 return Unauthorized("Ungültige Anmeldedaten!");
-            }
 
             if (!BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
-            {
                 return Unauthorized("Ungültige Anmeldedaten!");
-            }
 
-            if (_authService == null)
-            {
-                return StatusCode(500, "AuthService nicht initialisiert!");
-            }
-
+            // JWT erstellen
             var token = _authService.GenerateJwtToken(user.Email);
-            return Ok(new { Token = token });
+
+            // API-Key erstellen (wenn dein ApiKey-Service vorhanden ist)
+            string? apiKey = null;
+            if (_apiKeyService != null)
+            {
+                apiKey = _apiKeyService.CreateApiKey();
+            }
+
+            return Ok(new
+            {
+                Token = token,
+                ApiKey = apiKey
+            });
         }
 
         [HttpPost("register")]
