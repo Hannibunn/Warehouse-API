@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sets</title>
+
+  <style>
+    :root{
+      --bg:#f0e9e1;
+      --panel:#ffffff;
+      --ink:#1a1a1a;
+      --muted:#888;
+      --line:rgba(0,0,0,.12);
+      --radius:14px;
+      --shadow:0 8px 22px rgba(0,0,0,.12);
+      --accent:#b48b68;
+    }
+
+    html,body{
+      margin:0;
+      padding:0;
+      color:var(--ink);
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+    }
+
+    /* Header */
+    .header{background:var(--bg);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+    .container{max-width:1200px;margin:0 auto;padding:0 16px}
+    .header-inner{display:flex;align-items:center;gap:16px;padding:16px 0}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700}
+    .brand img{width:36px;height:36px}
+    .nav{display:flex;gap:16px;font-weight:600;letter-spacing:.02em}
+    .nav a{text-decoration:none;color:inherit;opacity:.75}
+    .nav a.active{opacity:1}
+    .spacer{flex:1}
+    .icons{display:flex;gap:8px}
+    .icons .avatar{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line)}
+
+    /* Titel */
+    .page-title{text-align:center;font-weight:900;font-size:clamp(36px,6vw,74px);margin:24px 0 12px}
+
+    /* Zentrierte Suchzeile + Mädchen rechts */
+    .title-tools{
+      max-width:1200px;
+      margin:0 auto 16px;
+      padding:0 16px;
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      align-items:center;
+      gap:20px;
+    }
+    .title-tools .search{
+      grid-column:2;
+      display:flex;align-items:center;gap:10px;
+      height:50px;padding:0 16px;
+      border-radius:28px;background:#fff;
+      box-shadow:inset 0 0 0 1px var(--line);
+      width:clamp(660px, 70vw, 960px); /* länger */
+    }
+    .title-tools .search input{
+      flex:1;border:none;outline:none;height:100%;
+      background:transparent;font-size:16px;
+    }
+    .title-girl{
+      grid-column:3;justify-self:end;
+      width:140px;height:auto;
+    }
+    @media (max-width:900px){
+      .title-girl{display:none}
+      .title-tools{grid-template-columns:1fr}
+      .title-tools .search{grid-column:1;justify-self:center;width:100%}
+    }
+
+    /* Grid: 3 Karten auf Desktop */
+    main{background:var(--bg);padding:8px 0 48px}
+    .grid{
+      max-width:1300px;margin:0 auto;padding:0 16px;
+      display:grid;gap:32px;
+      grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+    }
+    @media (min-width:1200px){
+      .grid{grid-template-columns:repeat(3, 1fr);}
+    }
+
+    /* Karte (mehr Platz für Bild, länglicher) */
+    .card{
+      background:var(--panel);border-radius:var(--radius);
+      box-shadow:var(--shadow);overflow:hidden;
+      border:1px solid var(--line);
+      display:flex;flex-direction:column;
+      transition:transform .25s ease,box-shadow .25s ease;
+    }
+    .card:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.16)}
+
+    .media{background:#e9eaec;display:grid;place-items:center;padding:20px}
+    .media img{width:100%;height:400px;object-fit:contain} /* mehr Platz für Bild */
+
+    .meta{padding:18px 20px 10px;display:grid;gap:8px}
+    .name{font-weight:700}
+    .kv{font-size:15px;color:#333}
+    .dim{color:var(--muted);font-size:13px}
+
+    .foot{display:flex;justify-content:flex-end;padding:14px 16px 16px}
+    .more{border:1px solid var(--line);background:#f4f4f4;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:600}
+    .more:hover{background:#ededed}
+
+    .extra{
+      overflow:hidden;max-height:0;
+      transition:max-height .35s ease,transform .35s ease;
+      transform:scale(.98);
+      border-top:1px dashed var(--line);
+      margin:0 16px 16px;border-radius:12px;
+      background:linear-gradient(135deg,#fcfcfc,#f1f1f1);padding:0 12px
+    }
+    .extra-inner{padding:16px 6px;display:grid;gap:10px}
+    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:#eef1f6;border:1px solid #e0e4ea}
+
+    .card.expanded .extra{max-height:520px;transform:scale(1)}
+    .card.expanded .meta{font-size:1.06rem}
+    .card.expanded .media img{height:480px;transition:height .35s ease}
+
+    .skeleton{background:linear-gradient(90deg,#eee,#f6f6f6,#eee);background-size:200% 100%;animation:sk 1.2s linear infinite}
+    @keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+    /* Footer */
+    footer{background:#1a1a1a;color:#fff;padding:40px 0 20px}
+    .footer-inner{max-width:1200px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+    .footer-brand{display:flex;flex-direction:column;gap:8px}
+    .footer-brand img{width:40px;height:40px}
+    .footer-input{display:flex;flex-wrap:wrap;gap:8px}
+    .footer-input input{flex:1;padding:8px;border:none;border-radius:4px}
+    .footer-input button{background:#b48b68;color:#fff;border:none;padding:8px 16px;border-radius:4px;cursor:pointer}
+    .footer-col h4{margin-bottom:8px;font-weight:600}
+    .footer-col ul{list-style:none;margin:0;padding:0}
+    .footer-col li{margin:4px 0}
+    .footer-social{text-align:center;margin-top:20px}
+    .footer-social a{margin:0 6px;color:#fff;text-decoration:none}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="Picture/logo.png" alt="Logo">
+        <div>Warehouse-Api</div>
+      </div>
+
+      <nav class="nav" aria-label="Navigation">
+        <a href="versuch.html">HOME</a>
+        <a class="active" href="Sets.html">SETS</a>
+        <a href="Box.html">BOX</a>
+      </nav>
+
+      <div class="spacer"></div>
+      <div class="icons"><div class="avatar"></div></div>
+    </div>
+  </header>
+
+  <!-- Titel + zentrierte Suche + Mädchen -->
+  <h1 class="page-title">Sets</h1>
+  <div class="title-tools">
+    <div class="search" role="search" aria-label="Sets suchen">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input id="q" placeholder="Suche" />
+    </div>
+    <img style="width: 20vh;" class="title-girl" src="Picture/mädchenlauft.png" alt="Girl Illustration" />
+  </div>
+
+  <!-- Grid -->
+  <main>
+    <section class="grid" id="grid"></section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="brand">
+          <img src="Picture/logo.png" alt="Logo">
+          <div>Warehouse-Api</div>
+        </div>
+        <div class="footer-input">
+          <input type="email" placeholder="Enter Email Address" />
+          <button>Sign Up</button>
+        </div>
+        <div>Contact Info<br>Some random address, Greater London NW1 8JR, UK</div>
+      </div>
+      <div class="footer-col">
+        <h4>CATEGORIES</h4>
+        <ul>
+          <li>Starwars</li>
+          <li>Marvel</li>
+          <li>Ninjago</li>
+          <li>Harrypotter</li>
+          <li>And more</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>CUSTOMER CARE</h4>
+        <ul>
+          <li>My Account</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>PAGES</h4>
+        <ul>
+          <li>Sets</li>
+          <li>Box</li>
+          <li>Home</li>
+          <li>Sign in</li>
+          <li>Register</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-social">
+      <a href="#">F</a><a href="#">I</a><a href="#">T</a>
+    </div>
+  </footer>
+
+  <script>
+    const API_SETS = '/api/sets';
+    const USE_DEMO_IF_FAILS = true;
+
+    const grid = document.getElementById('grid');
+    const qInput = document.getElementById('q');
+
+    let allSets = [];
+
+    function el(tag, cls, html){
+      const n=document.createElement(tag);
+      if(cls) n.className=cls;
+      if(html!=null) n.innerHTML=html;
+      return n;
+    }
+
+    function makeImage(url, alt){
+      const wrap=el('div','media');
+      const img=new Image();
+      img.alt=alt||'';
+      img.loading='lazy';
+      img.classList.add('skeleton');
+      img.src=url||'';
+      img.addEventListener('load',()=>img.classList.remove('skeleton'));
+      img.addEventListener('error',()=>{
+        img.classList.remove('skeleton');
+        img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400"><rect width="100%" height="100%" fill="#ddd"/><text x="50%" y="50%" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#666">kein Bild</text></svg>');
+      });
+      wrap.appendChild(img);
+      return wrap;
+    }
+
+    function makeCard(s){
+      const card=el('article','card');
+
+      card.appendChild(makeImage(s.imageUrl, s.name));
+
+      const meta=el('div','meta');
+      meta.appendChild(el('div','name', s.name || 'Unbenannt'));
+      meta.appendChild(el('div','kv', `Theme: ${s.theme || '-'}`));
+      meta.appendChild(el('div','kv', `Year: ${s.year ?? '-'}`));
+      meta.appendChild(el('div','kv', `ID: ${s.id ?? '-'} | SetID: ${s.setId ?? '-'}`));
+      meta.appendChild(el('div','kv', `Pieces: ${s.pieces ?? '-'}`));
+      card.appendChild(meta);
+
+      const extra=el('div','extra');
+      const inner=el('div','extra-inner');
+      inner.appendChild(el('div','dim','Tags'));
+      const tagsWrap=el('div','tags');
+      (s.tags||[]).forEach(t=>tagsWrap.appendChild(el('span','tag', t)));
+      if((s.tags||[]).length===0) tagsWrap.appendChild(el('span','dim','keine Tags'));
+      inner.appendChild(tagsWrap);
+      extra.appendChild(inner);
+      card.appendChild(extra);
+
+      const foot=el('div','foot');
+      const btn=el('button','more','See more');
+      btn.addEventListener('click',()=>{
+        const open=card.classList.toggle('expanded');
+        btn.textContent=open?'See less':'See more';
+      });
+      foot.appendChild(btn);
+      card.appendChild(foot);
+
+      return card;
+    }
+
+    function renderList(list){
+      grid.innerHTML='';
+      list.forEach(s=>grid.appendChild(makeCard(s)));
+    }
+
+    function applyFilter(){
+      const q=qInput.value.trim().toLowerCase();
+      if(!q){ renderList(allSets); return; }
+      const filtered=allSets.filter(s=>{
+        const hay=[s.name,s.theme,String(s.year),String(s.id),String(s.setId),...(s.tags||[])].join(' ').toLowerCase();
+        return hay.includes(q);
+      });
+      renderList(filtered);
+    }
+    let t;
+    qInput.addEventListener('input',()=>{
+      clearTimeout(t);
+      t=setTimeout(applyFilter,150);
+    });
+
+    init();
+    async function init(){
+      try{
+        const r=await fetch(API_SETS,{headers:{'Accept':'application/json'}});
+        if(!r.ok) throw new Error();
+        const data=await r.json();
+        allSets=(data||[]).map(x=>({
+          id: x.id ?? x.Id ?? x.ID,
+          setId: x.setId ?? x.SetID ?? x.setID ?? x.setNumber,
+          name: x.name ?? x.Name ?? x.title,
+          theme: x.theme ?? x.Theme,
+          year: x.year ?? x.Year,
+          pieces: x.pieces ?? x.Pieces,
+          tags: x.tags ?? x.Tags ?? [],
+          imageUrl: x.imageUrl ?? x.ImageUrl ?? x.image ?? x.img
+        }));
+        if(!allSets.length && USE_DEMO_IF_FAILS) throw new Error();
+        renderList(allSets);
+      }catch{
+        if(USE_DEMO_IF_FAILS){
+          allSets=[
+            {id:7,setId:3074,name:'Darth Mauls Sith Infiltrator',theme:'Star Wars',year:1974,pieces:18,tags:['Aircraft'],imageUrl:'Picture/set1.png'},
+            {id:8,setId:4090,name:'Podracer',theme:'Star Wars',year:1974,pieces:18,tags:['Aircraft'],imageUrl:'Picture/set2.png'},
+            {id:9,setId:5011,name:'NINJAGO Mech',theme:'Ninjago',year:2020,pieces:612,tags:['Robot'],imageUrl:'Picture/ninjago.png'}
+          ];
+          renderList(allSets);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

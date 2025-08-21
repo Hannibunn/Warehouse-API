@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <style>
+    :root{
+      --bg1:#6fb8be;
+      --bg2:#8dc9cf;
+      --bg3:#e6f2f6;
+      --ink:#1a1a1a;
+      --muted:#dcdcdc;
+      --muted-text:#666;
+      --radius:14px;
+    }
+    html,body{margin:0;padding:0;height:100%;font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink)}
+    .page{min-height:100%;display:grid;place-items:center;background:#2e2d2d}
+
+    .card{width:min(1100px,96vw);height:min(680px,94vh);background:#fff;border-radius:12px;overflow:hidden;display:grid;grid-template-columns:1.1fr 1.4fr;box-shadow:0 8px 24px rgba(0,0,0,.15)}
+
+    .visual{position:relative;overflow:hidden}
+    .visual::before{content:"";position:absolute;inset:0;background:radial-gradient(160% 120% at 0% 0%,var(--bg1) 0%,var(--bg2) 45%,var(--bg3) 100%)}
+    .cloud{position:absolute;pointer-events:none}
+    .cloud.cloud1{left:14px;top:18px;width:220px}
+    .cloud.cloud2{left:170px;top:150px;width:210px}
+    .robot{position:absolute;left:24px;bottom:18px;width:min(430px,42vw)}
+
+    .form{padding:48px 56px;display:flex;flex-direction:column;gap:24px}
+    .title{font-weight:800;font-size:64px;margin:0 0 10px 0}
+    label{font-weight:600;font-size:18px}
+    .control{display:flex;flex-direction:column;gap:8px}
+    input[type="email"],input[type="password"]{width:100%;padding:18px;border-radius:var(--radius);border:1px solid transparent;background:#e3e3e3;font-size:18px}
+    input.error{border-color:#c72c41;background:#ffe9ec}
+    .hint{color:var(--muted-text);font-size:15px;min-height:20px}
+    .actions{display:flex;gap:16px;margin-top:8px}
+    .btn{flex:1 1 220px;padding:16px 20px;border-radius:var(--radius);border:none;background:#dedede;font-size:20px;font-weight:600;cursor:pointer;text-align:center}
+    .btn.primary{background:#d9d9d9}
+    .btn[disabled]{opacity:.6;cursor:not-allowed}
+    .link-btn{all:unset;display:block;width:100%}
+    @media (max-width: 900px){
+      .card{grid-template-columns:1fr;height:auto}
+      .visual{height:320px}
+      .robot{width:min(360px,68vw);left:12px}
+      .cloud.cloud1{width:180px}
+      .cloud.cloud2{width:170px}
+      .form{padding:28px 20px}
+      .title{font-size:44px}
+      .actions{gap:12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="card">
+      <div class="visual" aria-hidden="true">
+        <img class="cloud cloud1" src="Picture/vollewolke.png" alt="">
+        <img class="cloud cloud2" src="Picture/vollewolke.png" alt="">
+        <img class="robot" src="Picture/Loginpicture.png" alt="Roboter">
+      </div>
+
+      <form class="form" id="loginForm" autocomplete="on">
+        <h1 class="title">Login</h1>
+
+        <div class="control">
+          <label for="email">email</label>
+          <input id="email" name="email" type="email" placeholder="example@gmail.com" required>
+        </div>
+
+        <div class="control">
+          <label for="pw">passwort</label>
+          <input id="pw" name="password" type="password" placeholder="xxxxxx" required>
+        </div>
+
+        <div class="actions">
+          <a class="link-btn" href="Register.html"><div class="btn">Register</div></a>
+          <button type="submit" class="btn primary" id="btn-login">Login</button>
+        </div>
+        <p class="hint" id="msg"></p>
+      </form>
+    </section>
+  </div>
+
+    <script>
+    /* ==========================================
+       Einstellungen
+       ========================================== */
+
+    // Basis-URL deines Controllers
+    // Beispiel: '/api/Login'
+    // Wenn dein Backend auf anderem Host/Port liegt, setze volle URL, z.B. 'https://localhost:5001/api/Login'
+    const API_BASE = '/api/Login';
+
+    // Seite, auf die du nach erfolgreichem Login leitest
+    const REDIRECT_AFTER_LOGIN = 'versuch.html';
+
+    /* ==========================================
+       DOM-Referenzen
+       ========================================== */
+    const form = document.getElementById('loginForm');
+    const emailEl = document.getElementById('email');
+    const pwEl = document.getElementById('pw');
+    const msgEl = document.getElementById('msg');
+    const btnLogin = document.getElementById('btn-login');
+
+    /* ==========================================
+       UI-Helper
+       ========================================== */
+
+    // Button sperren/entsperren
+    function setLoading(v){ btnLogin.disabled = v; }
+
+    // Meldung anzeigen + Felder optisch markieren bei Fehler
+    function showMsg(text, isError=false){
+      msgEl.textContent = text || '';
+      emailEl.classList.toggle('error', isError);
+      pwEl.classList.toggle('error', isError);
+    }
+
+    /* ==========================================
+       Antwortverarbeitung
+       ========================================== */
+
+    // Antwort robust lesen
+    // Liefert: { ok:boolean, status:number, data:object|null, text:string }
+    async function handleResponse(res){
+      const ct = res.headers.get('content-type') || '';
+      let data = null, text = '';
+      if (ct.includes('application/json')) {
+        // JSON sicher parsen
+        data = await res.json().catch(()=>null);
+      } else {
+        // Text lesen und ggf. JSON versuchen
+        text = await res.text();
+        try { data = JSON.parse(text); } catch {}
+      }
+      return { ok: res.ok, status: res.status, data, text };
+    }
+
+    // Sinnvollen Fehlertext extrahieren
+    // deckt typische ASP.NET-Formate ab:
+    // - { message: "..." }
+    // - { error: "..." }
+    // - { title: "...", detail: "..." }
+    // - { errors: { Feld: ["Fehler1","Fehler2"] } }
+    function extractError(payload, status, fallback){
+      if (!payload) return `${fallback} (HTTP ${status})`;
+      if (typeof payload === 'string') return `${payload} (HTTP ${status})`;
+      if (Array.isArray(payload)) return `${payload.join('\n')} (HTTP ${status})`;
+
+      if (payload.error) return `${payload.error} (HTTP ${status})`;
+      if (payload.message) return `${payload.message} (HTTP ${status})`;
+      if (payload.title && payload.detail) return `${payload.title}: ${payload.detail} (HTTP ${status})`;
+
+      if (payload.errors) {
+        const lines = [];
+        for (const [field, msgs] of Object.entries(payload.errors)) {
+          lines.push(`${field}: ${Array.isArray(msgs) ? msgs.join(', ') : msgs}`);
+        }
+        if (lines.length) return `${lines.join('\n')} (HTTP ${status})`;
+      }
+
+      // Fallback: erstes String-Feld nehmen, falls vorhanden
+      const firstString = Object.values(payload).find(v => typeof v === 'string');
+      if (firstString) return `${firstString} (HTTP ${status})`;
+
+      return `${fallback} (HTTP ${status})`;
+    }
+
+    /* ==========================================
+       Login-Flow
+       1) POST /api/Login/Login  → JWT holen
+       2) POST /api/Login/generate → API-Key erstellen
+       3) Token + API-Key in localStorage speichern
+       4) Redirect
+       ========================================== */
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      showMsg('');       // alte Meldung leeren
+      setLoading(true);  // Button sperren
+
+      try{
+        /* ---- 1) Login ---- */
+        const payload = { email: emailEl.value.trim(), password: pwEl.value };
+        const res = await fetch(`${API_BASE}/Login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const L = await handleResponse(res);
+        if (!L.ok) {
+          // Klaren Text anzeigen, kein [object Object]
+          showMsg(extractError(L.data ?? L.text, L.status, 'Anmeldung fehlgeschlagen'), true);
+          return;
+        }
+
+        // API kann Token als "Token" oder "token" liefern
+        const token = L.data?.Token || L.data?.token;
+        if (!token) {
+          showMsg('Kein Token erhalten', true);
+          return;
+        }
+
+        // JWT und Email speichern
+        localStorage.setItem('token', token);
+        localStorage.setItem('email', payload.email);
+
+        /* ---- 2) API-Key erzeugen ---- */
+        // Dein Endpoint erstellt einen neuen API-Key ohne Header
+        const resKey = await fetch(`${API_BASE}/generate`, { method:'POST' });
+        const K = await handleResponse(resKey);
+
+        // Bei Erfolg apiKey merken, andernfalls nur warnen
+        if (K.ok && (K.data?.apiKey || K.data?.ApiKey)) {
+          const apiKey = K.data.apiKey || K.data.ApiKey;
+          localStorage.setItem('apiKey', apiKey);
+        } else {
+          // keine harte Fehlermeldung für den Nutzer
+          console.warn('API-Key nicht erzeugt:', extractError(K.data ?? K.text, K.status, 'Fehler'));
+        }
+
+        /* ---- 3) Weiterleiten ---- */
+        window.location.href = REDIRECT_AFTER_LOGIN;
+
+      }catch(err){
+        // Netzwerkfehler, z.B. Server nicht erreichbar
+        showMsg(err?.message || 'Netzwerkfehler', true);
+      }finally{
+        setLoading(false); // Button wieder aktivieren
+      }
+    });
+
+    /* ==========================================
+       Beispiel-Helper (für Konsole/weitere Seiten)
+       ========================================== */
+
+    // Admin-Endpoint testen (braucht Admin-Key im Header)
+    async function fetchProtectedWithAdminKey(adminKey){
+      const r = await fetch(`${API_BASE}/protected-endpoint`, {
+        headers: { 'X-Api-Key': adminKey }
+      });
+      const R = await handleResponse(r);
+      if (!R.ok) throw new Error(extractError(R.data ?? R.text, R.status, 'Unauthorized'));
+      return R.data;
+    }
+
+    // Geschützte Route mit JWT
+    // Beispiel: eigene Boxen laden
+    async function getUserBoxes(userId){
+      const token = localStorage.getItem('token');
+      const r = await fetch(`${API_BASE}/user/${userId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      const R = await handleResponse(r);
+      if (!R.ok) throw new Error(extractError(R.data ?? R.text, R.status, 'Nicht autorisiert'));
+      return R.data;
+    }
+
+    // Eigenen API-Key validieren
+    async function validateMyApiKey(){
+      const apiKey = localStorage.getItem('apiKey');
+      const r = await fetch(`${API_BASE}/validate`, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body: JSON.stringify(apiKey)
+      });
+      const R = await handleResponse(r);
+      if (!R.ok) throw new Error(extractError(R.data ?? R.text, R.status, 'API-Key ungültig'));
+      return R.data;
+    }
+
+    // Optional: Login per API-Key + Email (dein /authenticate)
+    async function authenticateWithApiKey(email, apiKey){
+      const r = await fetch(`${API_BASE}/authenticate`, {
+        method:'POST',
+        headers:{
+          'Email': email,
+          'ApiKey': apiKey
+        }
+      });
+      const R = await handleResponse(r);
+      if (!R.ok) throw new Error(extractError(R.data ?? R.text, R.status, 'Authentifizierung fehlgeschlagen'));
+      // Antwort liefert { token, newApiKey }
+      if (R.data?.token) localStorage.setItem('token', R.data.token);
+      if (R.data?.newApiKey) localStorage.setItem('apiKey', R.data.newApiKey);
+      return R.data;
+    }
+  </script>
+</body>
+</html>

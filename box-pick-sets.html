@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sets auswählen</title>
+<style>
+  :root{ --bg:#f0e9e1; --panel:#fff; --ink:#1a1a1a; --muted:#888; --line:rgba(0,0,0,.12); --radius:14px; --shadow:0 8px 22px rgba(0,0,0,.12); --accent:#b48b68; }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif}
+  .container{max-width:1200px;margin:0 auto;padding:0 16px}
+  h1{text-align:center;margin:24px 0 8px;font-size:clamp(32px,5vw,60px)}
+  .searchbar{max-width:1000px;margin:0 auto 16px;display:flex;gap:10px;align-items:center;background:#fff;border-radius:26px;box-shadow:inset 0 0 0 1px var(--line);padding:10px 14px}
+  .searchbar input{flex:1;border:none;outline:none;font-size:16px;background:transparent}
+  .grid{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:1200px;margin:0 auto 24px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px;display:grid;gap:8px}
+  .media{background:#e9eaec;border-radius:12px;display:grid;place-items:center;height:220px}
+  .media img{max-width:100%;max-height:200px;object-fit:contain}
+  .name{font-weight:700}
+  .row{display:flex;gap:10px;justify-content:center;margin:8px 0 24px}
+  .btn{border:none;border-radius:12px;padding:12px 16px;font-weight:700;cursor:pointer}
+  .primary{background:var(--accent);color:#fff}
+  .ghost{background:#eee}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Sets auswählen</h1>
+
+  <div class="searchbar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <path d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <input id="q" placeholder="Suche" />
+  </div>
+
+  <section class="grid" id="grid"></section>
+
+  <div class="row">
+    <button class="btn ghost" id="back">Zurück</button>
+    <button class="btn primary" id="accept">Accept</button>
+  </div>
+</div>
+
+<script>
+  // Endpoints
+  const API_SETS = '/api/sets';
+  const API_BOX_BASE = '/api/Login'; // POST /api/Login -> CreateBox; POST /api/Login/{boxId}/sets -> AddSet
+
+  const grid = document.getElementById('grid');
+  const qInput = document.getElementById('q');
+  const backBtn = document.getElementById('back');
+  const acceptBtn = document.getElementById('accept');
+
+  let allSets = [];
+  let selected = new Set(); // gewählte set-IDs
+
+  backBtn.addEventListener('click', ()=>history.back());
+
+  function el(tag, cls, html){ const n=document.createElement(tag); if(cls) n.className=cls; if(html!=null) n.innerHTML=html; return n; }
+
+  function makeCard(s){
+    const card=el('label','card');
+    const top=el('div','media');
+    const img=new Image(); img.src=s.imageUrl||''; img.alt=s.name||''; img.loading='lazy';
+    img.onerror=()=>{ img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260"><rect width="100%" height="100%" fill="#ddd"/></svg>') }
+    top.appendChild(img); card.appendChild(top);
+
+    card.appendChild(el('div','name', s.name||'Unbenannt'));
+    card.appendChild(el('div','', `Theme: ${s.theme||'-'} · Year: ${s.year??'-'}`));
+
+    const cb = document.createElement('input');
+    cb.type='checkbox';
+    cb.checked = selected.has(s.id||s.Id);
+    cb.addEventListener('change',()=>{
+      const key = s.id||s.Id;
+      if(cb.checked) selected.add(key); else selected.delete(key);
+    });
+    card.appendChild(cb);
+    return card;
+  }
+
+  function render(list){
+    grid.innerHTML=''; list.forEach(s=>grid.appendChild(makeCard(s)));
+  }
+
+  function applyFilter(){
+    const q = qInput.value.trim().toLowerCase();
+    if(!q){ render(allSets); return; }
+    const filtered = allSets.filter(s=>{
+      const hay=[s.name,s.theme,String(s.year),String(s.setId)].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+    render(filtered);
+  }
+  let t; qInput.addEventListener('input',()=>{ clearTimeout(t); t=setTimeout(applyFilter,150); });
+
+  init();
+  async function init(){
+    const draftRaw = sessionStorage.getItem('boxDraft');
+    if(!draftRaw){ alert('Kein Box-Entwurf.'); location.href='box-new.html'; return; }
+
+    try{
+      const r = await fetch(API_SETS, { headers:{'Accept':'application/json'} });
+      if(!r.ok) throw new Error();
+      const data = await r.json();
+      allSets = (data||[]).map(x=>({
+        id:x.id??x.Id??x.ID, setId:x.setId??x.SetID??x.setNumber,
+        name:x.name??x.Name??x.title, theme:x.theme??x.Theme,
+        year:x.year??x.Year, imageUrl:x.imageUrl??x.ImageUrl??x.image??x.img
+      }));
+      render(allSets);
+    }catch{
+      allSets = [
+        {id:1,setId:101,name:'X-Wing',theme:'Star Wars',year:2019,imageUrl:'Picture/set1.png'},
+        {id:2,setId:102,name:'Speeder',theme:'Star Wars',year:2020,imageUrl:'Picture/set2.png'}
+      ];
+      render(allSets);
+    }
+  }
+
+  acceptBtn.addEventListener('click', createBoxWithSets);
+
+  async function createBoxWithSets(){
+    const draft = JSON.parse(sessionStorage.getItem('boxDraft')||'{}');
+    const token = localStorage.getItem('token')||'';
+
+    if(!draft.name){ alert('Name fehlt'); return; }
+
+    try{
+      // 1) Box anlegen
+      const r1 = await fetch(API_BOX_BASE, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
+        body: JSON.stringify({ name:draft.name, description:draft.description || '' })
+      });
+      if(!r1.ok){
+        const txt = await r1.text().catch(()=> '');
+        throw new Error('Box konnte nicht erstellt werden. ' + txt);
+      }
+      const newBox = await r1.json(); // erwartet die Box mit ID
+      const boxId = newBox.id ?? newBox.ID;
+      if(!boxId) throw new Error('Box-ID fehlt in der Antwort.');
+
+      // 2) Sets hinzufügen (optional)
+      const ids = Array.from(selected);
+      for(const setKey of ids){
+        const setObj = allSets.find(s=>(s.id||s.Id)===setKey);
+        if(!setObj) continue;
+
+        const payload = {
+          id: 0,
+          setId: setObj.setId || setObj.id || 0,
+          name: setObj.name || '',
+          theme: setObj.theme || '',
+          year: setObj.year || 0
+        };
+
+        const r2 = await fetch(`${API_BOX_BASE}/${boxId}/sets`, {
+          method:'POST',
+          headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
+          body: JSON.stringify(payload)
+        });
+        if(!r2.ok){
+          const t = await r2.text().catch(()=> '');
+          throw new Error('Set konnte nicht hinzugefügt werden. ' + t);
+        }
+      }
+
+      // 3) Aufräumen und zurück zur Box-Liste
+      sessionStorage.removeItem('boxDraft');
+      alert('Box erstellt.');
+      location.href = 'box.html';
+
+    }catch(err){
+      alert(String(err.message||err));
+    }
+  }
+</script>
+</body>
+</html>
