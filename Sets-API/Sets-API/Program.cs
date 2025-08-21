@@ -85,12 +85,28 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 
+// User secrets
+builder.Configuration.AddUserSecrets<Program>();
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowMyWebsite", policy =>
+    {
+        policy.WithOrigins("https://hannibunn.github.io/Warehouse-API/")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+;
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -102,9 +118,19 @@ if (app.Environment.IsDevelopment())
 }
 // Verwende die API-Key-Middleware
 app.UseMiddleware<ApiKey_Middelware>();
+app.UseHttpsRedirection();
+app.UseRouting();
+//// Verwende CORS
+//app.UseCors("AllowMyWebsite");
+//app.UseSwaggerUI(c =>
+//{
+//    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sets API V1");
+//    c.RoutePrefix = string.Empty; // Swagger UI unter der Root-URL verfügbar machen
+//});
+//app.UseRouting();
 
-// Verwende die Authentifizierung
-app.UseAuthentication();
+
+// Verwende die Authentifizierungapp.UseAuthentication();
 app.UseAuthorization();
 
 
