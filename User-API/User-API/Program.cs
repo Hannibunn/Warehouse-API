@@ -87,7 +87,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMyWebsite", policy =>
     {
-        policy.WithOrigins("https://hannibunn.github.io/Warehouse-API/e")
+        policy.WithOrigins("https://hannibunn.github.io/Warehouse-API/")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
