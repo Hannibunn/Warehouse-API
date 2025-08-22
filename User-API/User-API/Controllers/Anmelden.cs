@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using User_API.APIKEYS;
 using User_API.Data;
 using User_API.Models;
 using User_API.Services;
@@ -14,10 +15,12 @@ namespace User_API.Controllers
     {
         private readonly AuthService _authService;
         private readonly ApplicatonDbContext _context;
-        public Anmelden(ApplicatonDbContext context, AuthService authService)
+        private readonly ApiKey? _apiKeyService;
+        public Anmelden(ApplicatonDbContext context, AuthService authService, ApiKey? apiKeyService)
         {
             _context = context;
             _authService = authService;
+            _apiKeyService = apiKeyService;
         }
 
         // Login
@@ -38,9 +41,13 @@ namespace User_API.Controllers
             if (!BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
                 return Unauthorized("Ungültige Anmeldedaten!");
 
+            // JWT erstellen
             var token = _authService.GenerateJwtToken(user.Email);
 
-            return Ok(new { Token = token });
+            // API-Key erzeugen (optional)
+            string apiKey = _apiKeyService.CreateApiKey();
+
+            return Ok(new { Token = token, ApiKey = apiKey });
         }
 
         // Registrierung
