@@ -44,7 +44,7 @@
 
 <script>
   // Endpoints
-  const API_SETS = 'https://Setsapi.pleeging.com/api/Warehouseapi';
+  const API_SETS = 'https://Setsapi.pleeging.com/api/Warehouseapi/latest';
   const API_BOX_BASE = 'https://Setsapi.pleeging.com/api/Warehouseapi/boxes'; // POST /api/Login -> CreateBox; POST /api/Login/{boxId}/sets -> AddSet
 
   const grid = document.getElementById('grid');
@@ -111,10 +111,14 @@
       if(!r.ok) throw new Error();
       const data = await r.json();
       allSets = (data||[]) .slice(0, 100).map(x=>({
-        id:x.id??x.Id??x.ID, setId:x.setId??x.SetID??x.setNumber,
-        name:x.name??x.Name??x.title, theme:x.theme??x.Theme,
-        year:x.year??x.Year, imageUrl:x.image?.imageUrl??x.ImageUrl??x.image??x.img
-      }));
+        id: x.id,
+      setId: x.setID,
+      name: x.name,
+      theme: x.theme,
+      year: x.year,
+      pieces: x.pieces,
+      tags: Array.isArray(x.extendedData?.tags) ? x.extendedData.tags : (x.Tags ?? []),
+      imageUrl: x.image?.imageURL ?? ""}));
       render(allSets);
     }catch{
       allSets = [

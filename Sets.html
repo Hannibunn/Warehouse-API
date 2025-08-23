@@ -104,7 +104,7 @@
 
 <script>
 // API-URL inklusive AdminKey in der Query-String
-const API_URL = "https://Setsapi.pleeging.com/api/Warehouseapi";
+const API_URL = "https://Setsapi.pleeging.com/api/Warehouseapi/latest";
 
 const grid = document.getElementById("grid");
 const qInput = document.getElementById("q");
@@ -211,14 +211,14 @@ async function init() {
     if (!arr.length) throw new Error("keine Daten");
 
     allSets =  arr.slice(0, 100).map(x => ({
-      id: x.id ?? x.Id ?? x.ID,
-      setId: x.setId ?? x.SetID ?? x.setNumber,
-      name: x.name ?? x.Name ?? x.title,
-      theme: x.theme ?? x.Theme,
-      year: x.year ?? x.Year,
-      pieces: x.pieces ?? x.Pieces,
-      tags: x.extendedData?.tags ?? x.Tags ?? [],
-      imageUrl: x.image?.imageURL ?? x.imageUrl ?? x.ImageUrl ?? x.img ?? x.Image?.imageURL ?? ""    }));
+      id: x.id,
+      setId: x.setID,
+      name: x.name,
+      theme: x.theme,
+      year: x.year,
+      pieces: x.pieces,
+      tags: Array.isArray(x.extendedData?.tags) ? x.extendedData.tags : (x.Tags ?? []),
+      imageUrl: x.image?.imageURL ?? ""}));
 
     renderList(allSets);
   } catch (err) {
