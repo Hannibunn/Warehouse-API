@@ -141,7 +141,7 @@
       // 1) Box anlegen
       const r1 = await fetch(API_BOX_BASE, {
         method:'POST',
-        headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
+        headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token, "x-api-key": "TheLionwants3datelsafter20request" },
         body: JSON.stringify({ name:draft.name, description:draft.description || '' })
       });
       if(!r1.ok){
