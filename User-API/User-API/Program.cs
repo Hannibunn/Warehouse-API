@@ -92,7 +92,9 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+
 builder.Services.AddControllers();
+
 var app = builder.Build();
 
 // Swagger in Development
@@ -106,7 +108,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+// CORS muss VOR Middleware / Auth kommen
 app.UseCors("AllowMyWebsite");
+
 // API-Key Middleware, außer Login/Register
 app.UseWhen(context =>
     !context.Request.Path.StartsWithSegments("/api/Anmelden/login") &&
@@ -119,9 +123,6 @@ app.UseWhen(context =>
 // Auth & Authorization
 app.UseAuthentication();
 app.UseAuthorization();
-
-// CORS
-app.UseCors("AllowMyWebsite");
 
 // Map Controllers
 app.MapControllers();
