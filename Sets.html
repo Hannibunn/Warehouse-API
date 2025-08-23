@@ -119,12 +119,11 @@
 <div id="form-message" aria-live="polite"></div>
 <script>
   const API_URL = "https://Setsapi.pleeging.com/api/Warehouseapi?AdminKey=TheLionwants3datelsafter20request";
-
   const grid = document.getElementById("grid");
   const qInput = document.getElementById("q");
   let allSets = [];
 
-  // Hilfsfunktion zum Erstellen von Elementen
+  // Helfer-Funktion zum Erstellen von Elementen
   function el(tag, cls, html) {
     const n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -132,121 +131,137 @@
     return n;
   }
 
-  // Bild mit Fehler-Handling
+  // Bild erstellen mit Fallback
   function makeImage(url, alt) {
-    const wrap = el("div","media");
+    const wrap = el("div", "media");
     const img = new Image();
     img.alt = alt || "";
     img.loading = "lazy";
     img.classList.add("skeleton");
+
+    // URL prüfen
     img.src = url || "";
-    img.addEventListener("load",()=> img.classList.remove("skeleton"));
-    img.addEventListener("error",()=>{
+    
+    img.addEventListener("load", () => img.classList.remove("skeleton"));
+    img.addEventListener("error", () => {
       img.classList.remove("skeleton");
       img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
         '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400"><rect width="100%" height="100%" fill="#ddd"/><text x="50%" y="50%" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#666">kein Bild</text></svg>'
       );
     });
+
     wrap.appendChild(img);
     return wrap;
   }
 
-  // Karte für ein Set
-  function makeCard(s){
-    const card = el("article","card");
+  // Set-Card erstellen
+  function makeCard(s) {
+    const card = el("article", "card");
     card.appendChild(makeImage(s.imageUrl, s.name));
 
-    const meta = el("div","meta");
-    meta.appendChild(el("div","name", s.name || "Unbenannt"));
-    meta.appendChild(el("div","kv", `Theme: ${s.theme || "-"}`));
-    meta.appendChild(el("div","kv", `Year: ${s.year ?? "-"}`));
-    meta.appendChild(el("div","kv", `ID: ${s.id ?? "-"} | SetID: ${s.setId ?? "-"}`));
-    meta.appendChild(el("div","kv", `Pieces: ${s.pieces ?? "-"}`));
+    const meta = el("div", "meta");
+    meta.appendChild(el("div", "name", s.name || "Unbenannt"));
+    meta.appendChild(el("div", "kv", `Theme: ${s.theme || "-"}`));
+    meta.appendChild(el("div", "kv", `Year: ${s.year ?? "-"}`));
+    meta.appendChild(el("div", "kv", `ID: ${s.id ?? "-"} | SetID: ${s.setId ?? "-"}`));
+    meta.appendChild(el("div", "kv", `Pieces: ${s.pieces ?? "-"}`));
     card.appendChild(meta);
 
-    const extra = el("div","extra");
-    const inner = el("div","extra-inner");
-    inner.appendChild(el("div","dim","Tags"));
-    const tagsWrap = el("div","tags");
-    (s.tags || []).forEach(t => tagsWrap.appendChild(el("span","tag", t)));
-    if ((s.tags || []).length === 0) tagsWrap.appendChild(el("span","dim","keine Tags"));
+    const extra = el("div", "extra");
+    const inner = el("div", "extra-inner");
+    inner.appendChild(el("div", "dim", "Tags"));
+
+    const tagsWrap = el("div", "tags");
+    (s.tags || []).forEach(t => tagsWrap.appendChild(el("span", "tag", t)));
+    if ((s.tags || []).length === 0) tagsWrap.appendChild(el("span", "dim", "keine Tags"));
     inner.appendChild(tagsWrap);
+
     extra.appendChild(inner);
     card.appendChild(extra);
 
-    const foot = el("div","foot");
-    const btn = el("button","more","See more");
-    btn.addEventListener("click",()=>{
+    const foot = el("div", "foot");
+    const btn = el("button", "more", "See more");
+    btn.addEventListener("click", () => {
       const open = card.classList.toggle("expanded");
       btn.textContent = open ? "See less" : "See more";
     });
     foot.appendChild(btn);
     card.appendChild(foot);
+
     return card;
   }
 
   // Liste rendern
-  function renderList(list){
+  function renderList(list) {
     grid.innerHTML = "";
     list.forEach(s => grid.appendChild(makeCard(s)));
   }
 
-  // Filterfunktion
-  function applyFilter(){
+  // Filter anwenden
+  function applyFilter() {
     const q = qInput.value.trim().toLowerCase();
-    if (!q){ renderList(allSets); return; }
-    const filtered = allSets.filter(s=>{
-      const hay = [s.name,s.theme,String(s.year),String(s.id),String(s.setId),...(s.tags||[])]
-        .join(" ").toLowerCase();
+    if (!q) { renderList(allSets); return; }
+
+    const filtered = allSets.filter(s => {
+      const hay = [s.name, s.theme, String(s.year), String(s.id), String(s.setId), ...(s.tags || [])].join(" ").toLowerCase();
       return hay.includes(q);
     });
+
     renderList(filtered);
   }
 
   let t;
-  qInput.addEventListener("input",()=>{ clearTimeout(t); t = setTimeout(applyFilter,150); });
+  qInput.addEventListener("input", () => { clearTimeout(t); t = setTimeout(applyFilter, 150); });
 
-  // API abrufen
-  async function fetchSets(){
-    const res = await fetch(API_URL, { method: "GET" });
-    if(!res.ok){
-      const text = await res.text().catch(()=> "");
+  // API-Daten holen
+  async function fetchSets() {
+    const res = await fetch(API_URL, { method: "GET", headers: { "Accept": "application/json" } });
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
       throw new Error(`${res.status} ${text}`);
     }
     return res.json();
   }
 
-  // Initialisierung
-  async function init(){
-    try{
+  // Init
+  async function init() {
+    try {
       const data = await fetchSets();
       const arr = Array.isArray(data) ? data : (data.$values || []);
       if (!arr.length) throw new Error("keine Daten");
 
-      allSets = arr.map(x=>({
-        id: x.id ?? x.Id,
-        setId: x.setID ?? x.setId,
-        name: x.name ?? x.Number ?? "Unbenannt",
-        theme: x.theme ?? "-",
-        year: x.year ?? "-",
-        pieces: x.pieces ?? "-",
-        tags: x.ExtendedData?.Tags ?? [],
-        imageUrl: x.Image?.imageURL || "Picture/default.png"
-      }));
+      allSets = arr.map(x => {
+        return {
+          id: x.id ?? x.Id ?? x.ID,
+          setId: x.setId ?? x.SetID ?? x.setNumber,
+          name: x.name ?? x.Name ?? x.title,
+          theme: x.theme ?? x.Theme,
+          year: x.year ?? x.Year,
+          pieces: x.pieces ?? x.Pieces,
+          tags: x.tags ?? x.Tags ?? [],
+          imageUrl: (x.Image && x.Image.imageURL) || x.imageUrl || x.ImageUrl || ""  // Fallbacks prüfen
+        };
+      });
+
       renderList(allSets);
-    }catch(err){
-      console.error(err);
-      alert("API konnte nicht geladen werden, zeige Demo-Daten");
+
+    } catch (err) {
+      alert("Fehler beim Laden der Sets: " + err.message);
+
+      // Demo-Daten
       allSets = [
-        { id: 1, setId: 101, name: "Demo Set 1", theme: "Star Wars", year: 2020, pieces: 123, tags:["Demo"], imageUrl:"Picture/set1.png" },
-        { id: 2, setId: 102, name: "Demo Set 2", theme: "Ninjago", year: 2021, pieces: 456, tags:["Demo"], imageUrl:"Picture/set2.png" }
+        { id: 7, setId: 3074, name: "Darth Mauls Sith Infiltrator", theme: "Star Wars", year: 1974, pieces: 18, tags: ["Aircraft"], imageUrl: "Picture/set1.png" },
+        { id: 8, setId: 4090, name: "Podracer", theme: "Star Wars", year: 1974, pieces: 18, tags: ["Aircraft"], imageUrl: "Picture/set2.png" },
+        { id: 9, setId: 5011, name: "NINJAGO Mech", theme: "Ninjago", year: 2020, pieces: 612, tags: ["Robot"], imageUrl: "Picture/ninjago.png" }
       ];
+
       renderList(allSets);
     }
   }
 
   init();
 </script>
+
 
 
 
