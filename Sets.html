@@ -210,7 +210,7 @@ async function init() {
     const arr = Array.isArray(data) ? data : (data.$values || []);
     if (!arr.length) throw new Error("keine Daten");
 
-    allSets = arr.map(x => ({
+    allSets =  arr.slice(0, 100).map(x => ({
       id: x.id ?? x.Id ?? x.ID,
       setId: x.setId ?? x.SetID ?? x.setNumber,
       name: x.name ?? x.Name ?? x.title,
