@@ -106,6 +106,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseCors("AllowMyWebsite");
 // API-Key Middleware, außer Login/Register
 app.UseWhen(context =>
     !context.Request.Path.StartsWithSegments("/api/Anmelden/login") &&

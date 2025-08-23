@@ -14,6 +14,7 @@ using System.Text;
 using BCrypt.Net;
 using System.Security.Claims;
 using User_API.Services;
+using Microsoft.AspNetCore.Authorization;
 
 
 
@@ -129,29 +130,34 @@ namespace User_API.Controllers
             }
             return Ok(new { message = "Erfolgreicher Zugriff auf geschützte Daten" });
         }
-        // Authentifizierung Controller mit email und API-Key
+        // Authentifizierung Controller mit JWT + API-Key
         [HttpPost("authenticate")]
-        public IActionResult GetApiKeys()
+        [Authorize] 
+        public IActionResult RefreshApiKey()
         {
             var apiKey = Request.Headers["ApiKey"].ToString();
             if (string.IsNullOrEmpty(apiKey))
             {
                 return Unauthorized("API key is required.");
             }
+
+            // Prüfe ApiKey und erzeuge ggf. neuen
             if (!_apiKeyService.ValidateApiKey(apiKey, out string newKey))
             {
                 return Unauthorized("Invalid API key.");
             }
-            var email = Request.Headers["Email"].ToString();
+
+            // Email aus JWT ziehen (Claim "email")
+            var email = User.Claims.FirstOrDefault(c => c.Type == "email")?.Value;
             if (string.IsNullOrEmpty(email))
             {
-                return BadRequest("Email is required for authentication.");
+                return Unauthorized("JWT does not contain a valid email.");
             }
-            var token = _authService.GenerateJwtToken(email);
-            return Ok(new { token, newApiKey = newKey });
 
+            // Kein neues JWT erzeugen -> Token bleibt gleich!
+            return Ok(new { newApiKey = newKey });
         }
- 
+
         // Ueberprüfung API Key Controller
         [HttpPost("validate")]
         public IActionResult ValidateApiKey([FromBody] string apiKey)
