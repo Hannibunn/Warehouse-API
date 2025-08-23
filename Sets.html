@@ -118,8 +118,8 @@
 </footer>
 <div id="form-message" aria-live="polite"></div>
 <script>
-  const API_SETS = "https://Setsapi.pleeging.com/api/Warehouseapi?AdminKey=TheLionwants3datelsafter20request";
-  const PROXY = "https://api.allorigins.win/raw?url=" + encodeURIComponent(API_SETS);
+  const API_BASE = "https://Setsapi.pleeging.com/api/Warehouseapi";
+  const ADMIN_KEY = "TheLionwants3datelsafter20request";
 
   const grid = document.getElementById("grid");
   const qInput = document.getElementById("q");
@@ -150,7 +150,7 @@
     return wrap;
   }
 
-  function makeCard(s) {
+  function makeCard(s){
     const card = el("article","card");
     card.appendChild(makeImage(s.imageUrl, s.name));
     const meta = el("div","meta");
@@ -182,55 +182,67 @@
     return card;
   }
 
-  function renderList(list) {
+  function renderList(list){
     grid.innerHTML = "";
     list.forEach(s => grid.appendChild(makeCard(s)));
   }
 
-  function applyFilter() {
+  function applyFilter(){
     const q = qInput.value.trim().toLowerCase();
-    if (!q) { renderList(allSets); return; }
-    const filtered = allSets.filter(s => {
-      const hay = [s.name, s.theme, String(s.year), String(s.id), String(s.setId), ...(s.tags || [])]
+    if (!q){ renderList(allSets); return; }
+    const filtered = allSets.filter(s=>{
+      const hay = [s.name,s.theme,String(s.year),String(s.id),String(s.setId),...(s.tags||[])]
         .join(" ").toLowerCase();
       return hay.includes(q);
     });
     renderList(filtered);
   }
-
   let t;
-  qInput.addEventListener("input", () => {
-    clearTimeout(t);
-    t = setTimeout(applyFilter, 150);
-  });
+  qInput.addEventListener("input",()=>{ clearTimeout(t); t = setTimeout(applyFilter,150); });
 
-  async function fetchJson(url) {
-    const res = await fetch(url, { method: "GET", headers: { Accept: "application/json" }, credentials: "omit" });
+  async function fetchJson(url, opts = {}) {
+    const res = await fetch(url, opts);
     const ct = res.headers.get("content-type") || "";
-    const payload = ct.includes("application/json") ? await res.json().catch(() => null) : await res.text().catch(() => "");
+    const body = ct.includes("application/json")
+      ? await res.json().catch(()=>null)
+      : await res.text().catch(()=> "");
     if (!res.ok) {
-      const msg = (payload && payload.message) || (typeof payload === "string" ? payload : "");
+      const msg = (body && body.message) || (typeof body === "string" ? body : "");
       throw new Error(`${res.status}${msg ? " " + msg : ""}`);
     }
-    return payload;
+    return body;
   }
 
   async function loadSets() {
+    // Versuch A: wie Postman per Header AdminKey
     try {
-      // 1) Direkt (kann 401/403 liefern)
-      const data = await fetchJson(API_SETS);
-      return data;
+      return await fetchJson(API_BASE, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+          "AdminKey": ADMIN_KEY
+        },
+        credentials: "omit",
+        cache: "no-store"
+      });
     } catch (e) {
-      // 2) Fallback über Proxy (umgeht Origin-Restriktionen)
-      const data = await fetchJson(PROXY);
-      return data;
+      // Versuch B: Query-Parameter
+      if (String(e.message).startsWith("401") || String(e.message).startsWith("403")) {
+        return await fetchJson(`${API_BASE}?AdminKey=${encodeURIComponent(ADMIN_KEY)}`, {
+          method: "GET",
+          headers: { "Accept": "application/json" },
+          credentials: "omit",
+          cache: "no-store"
+        });
+      }
+      throw e;
     }
   }
 
-  async function init() {
-    try {
+  async function init(){
+    try{
       const data = await loadSets();
-      allSets = (data || []).map(x => ({
+      allSets = (data || []).map(x=>({
         id: x.id ?? x.Id ?? x.ID,
         setId: x.setId ?? x.SetID ?? x.setNumber,
         name: x.name ?? x.Name ?? x.title,
@@ -248,7 +260,7 @@
       }));
       if (!allSets.length) throw new Error("keine Daten");
       renderList(allSets);
-    } catch (err) {
+    }catch(err){
       alert("Fehler beim Laden der Sets: " + err.message);
       allSets = [
         { id: 7, setId: 3074, name: "Darth Mauls Sith Infiltrator", theme: "Star Wars", year: 1974, pieces: 18, tags: ["Aircraft"], imageUrl: "Picture/set1.png" },
@@ -261,6 +273,7 @@
 
   init();
 </script>
+
 
 
 
