@@ -155,7 +155,8 @@
         body: JSON.stringify({ 
           name : draft.name, 
           description : draft.description || '',
-          User : userid })
+          User: {
+             Id: userid}})
       });
       if(!r1.ok){
         const txt = await r1.text().catch(()=> '');
