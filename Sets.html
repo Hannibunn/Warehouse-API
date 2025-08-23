@@ -197,21 +197,28 @@
     });
     renderList(filtered);
   }
+
   let t;
   qInput.addEventListener("input",()=>{ clearTimeout(t); t = setTimeout(applyFilter,150); });
 
+  async function fetchSets(){
+    const res = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "X-Api-Key": API_KEY
+      }
+    });
+    if(!res.ok){
+      const text = await res.text().catch(()=> "");
+      throw new Error(`${res.status} ${text}`);
+    }
+    return res.json();
+  }
+
   async function init(){
     try{
-      const res = await fetch(API_URL, {
-        method: "GET",
-        headers: {
-          "Accept": "application/json",
-          "AdminKey": API_KEY
-        }
-      });
-      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-      const data = await res.json();
-
+      const data = await fetchSets();
       const arr = Array.isArray(data) ? data : (data.$values || []);
       if (!arr.length) throw new Error("keine Daten");
 
@@ -239,6 +246,7 @@
 
   init();
 </script>
+
 
 
 
