@@ -25,15 +25,25 @@ namespace Sets_API.Controller
             _apiKeyService = apiKeyService;
         }
 
-        //  Sets Controller
-        [HttpGet]
+        //Sets Controller alle 
+      [HttpGet("All")]
         public async Task<ActionResult<IEnumerable<Set>>> GetSets()
         {
             var sets = await _context.Sets/*.Take(1000)*/.
                 ToListAsync();
             return Ok(sets);
         }
+        // Sets Controller
+        [HttpGet("latest")]
+        public async Task<ActionResult<IEnumerable<Set>>> GetLatestSets()
+        {
+            var sets = await _context.Sets
+                .Where(s => s.year >= 2024)
+                .Take(1000)
+                .ToListAsync();
 
+            return Ok(sets);
+        }
         // Abrufen von Sets anhand der ID
         [HttpGet("sets/{id}")]
         public async Task<ActionResult<Set>> GetSetById(int id)
