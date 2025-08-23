@@ -135,11 +135,18 @@
 
       try{
         // 1) Box anlegen
-        const r1 = await fetch(API_BOX_BASE, {
-          method:'POST',
-          headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
-          body: JSON.stringify({ name:draft.name, description:draft.description || '' })
-        });
+       const r1 = await fetch(API_BOX_BASE, {
+  method:'POST',
+  headers:{ 
+    'Content-Type':'application/json', 
+    'Authorization':'Bearer '+token,
+    'x-api-key': 'TheLionwants3datelsafter20request'  // <-- hier hinzufügen
+  },
+  body: JSON.stringify({ 
+    name: draft.name, 
+    description: draft.description || '' 
+  })
+});
         if(!r1.ok){
           const txt = await r1.text().catch(()=> '');
           throw new Error('Box konnte nicht erstellt werden. ' + txt);
@@ -162,11 +169,16 @@
             year: setObj.year || 0
           };
 
-          const r2 = await fetch(`${API_BOX_BASE}/${boxId}/sets`, {
-            method:'POST',
-            headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
-            body: JSON.stringify(payload)
-          });
+     const r2 = await fetch(`${API_BOX_BASE}/${boxId}/sets`, {
+  method:'POST',
+  headers:{ 
+    'Content-Type':'application/json', 
+    'Authorization':'Bearer '+token,
+    'x-api-key': 'TheLionwants3datelsafter20request'  // <-- hier auch
+  },
+  body: JSON.stringify(payload)
+});
+
           if(!r2.ok){
             const t = await r2.text().catch(()=> '');
             throw new Error('Set konnte nicht hinzugefügt werden. ' + t);
