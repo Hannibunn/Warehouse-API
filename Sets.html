@@ -217,7 +217,7 @@ async function init() {
       theme: x.theme ?? x.Theme,
       year: x.year ?? x.Year,
       pieces: x.pieces ?? x.Pieces,
-      tags: x.tags ?? x.Tags ?? [],
+      tags: x.extendedData?.tags ?? x.Tags ?? [],
       imageUrl: x.image?.imageURL ?? x.imageUrl ?? x.ImageUrl ?? x.img ?? x.Image?.imageURL ?? ""    }));
 
     renderList(allSets);
