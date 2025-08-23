@@ -42,167 +42,146 @@
   </div>
 </div>
 
-<script>
-  // Endpoints
-  const API_SETS = 'https://Setsapi.pleeging.com/api/Warehouseapi/latest';
-  const API_BOX_BASE = 'https://Setsapi.pleeging.com/api/Warehouseapi/boxes'; // POST /api/Login -> CreateBox; POST /api/Login/{boxId}/sets -> AddSet
+  <script>
+    // Endpoints
+    const API_SETS = 'https://Setsapi.pleeging.com/api/Warehouseapi';
+    const API_BOX_BASE = 'https://Setsapi.pleeging.com/api/Login'; // POST /api/Login -> CreateBox; POST /api/Login/{boxId}/sets -> AddSet
 
-  const grid = document.getElementById('grid');
-  const qInput = document.getElementById('q');
-  const backBtn = document.getElementById('back');
-  const acceptBtn = document.getElementById('accept');
+    const grid = document.getElementById('grid');
+    const qInput = document.getElementById('q');
+    const backBtn = document.getElementById('back');
+    const acceptBtn = document.getElementById('accept');
 
-  let allSets = [];
-  let selected = new Set(); // gewählte set-IDs
+    let allSets = [];
+    let selected = new Set(); // gewählte set-IDs
 
-  backBtn.addEventListener('click', ()=>history.back());
+    backBtn.addEventListener('click', ()=>history.back());
 
-  function el(tag, cls, html){ const n=document.createElement(tag); if(cls) n.className=cls; if(html!=null) n.innerHTML=html; return n; }
+    function el(tag, cls, html){ const n=document.createElement(tag); if(cls) n.className=cls; if(html!=null) n.innerHTML=html; return n; }
 
-  function makeCard(s){
-    const card=el('label','card');
-    const top=el('div','media');
-    const img=new Image(); 
-    img.src=s.image?.imageURL||''; 
-    img.alt=s.name||''; img.loading='lazy';
-    img.onerror=()=>{ img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260"><rect width="100%" height="100%" fill="#ddd"/></svg>') }
-    top.appendChild(img); 
-    card.appendChild(top);
+    function makeCard(s){
+      const card=el('label','card');
+      const top=el('div','media');
+      const img=new Image(); img.src=s.image?.imageURL||''; img.alt=s.name||''; img.loading='lazy';
+      img.onerror=()=>{ img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260"><rect width="100%" height="100%" fill="#ddd"/></svg>') }
+      top.appendChild(img); card.appendChild(top);
 
-    card.appendChild(el('div','name', s.name||'Unbenannt'));
-    card.appendChild(el('div','', `Theme: ${s.theme||'-'} · Year: ${s.year??'-'}`));
+      card.appendChild(el('div','name', s.name||'Unbenannt'));
+      card.appendChild(el('div','', `Theme: ${s.theme||'-'} · Year: ${s.year??'-'}`));
 
-    const cb = document.createElement('input');
-    cb.type='checkbox';
-    cb.checked = selected.has(s.id||s.Id);
-    cb.addEventListener('change',()=>{
-      const key = s.id||s.Id;
-      if(cb.checked) selected.add(key); else selected.delete(key);
-    });
-    card.appendChild(cb);
-    return card;
-  }
-
-  function render(list){
-    grid.innerHTML=''; list.forEach(s=>grid.appendChild(makeCard(s)));
-  }
-
-  function applyFilter(){
-    const q = qInput.value.trim().toLowerCase();
-    if(!q){ render(allSets); return; }
-    const filtered = allSets.filter(s=>{
-      const hay=[s.name,s.theme,String(s.year),String(s.setId)].join(' ').toLowerCase();
-      return hay.includes(q);
-    });
-    render(filtered);
-  }
-  let t; qInput.addEventListener('input',()=>{ clearTimeout(t); t=setTimeout(applyFilter,150); });
-
-  init();
-  async function init(){
-    const draftRaw = sessionStorage.getItem('boxDraft');
-    if(!draftRaw){ alert('Kein Box-Entwurf.'); location.href='box-new.html'; return; }
-
-    try{
-      const r = await fetch(API_SETS,{
-    method: "GET",
-    headers: {
-      "Accept": "application/json",
-      "x-api-key": "TheLionwants3datelsafter20request"
-    }
-  });
-      if(!r.ok) throw new Error();
-      const data = await r.json();
-      allSets = (data||[]) .slice(0, 100).map(x=>({
-        id: x.id,
-      setId: x.setID,
-      name: x.name,
-      theme: x.theme,
-      year: x.year,
-      pieces: x.pieces,
-      tags: Array.isArray(x.extendedData?.tags) ? x.extendedData.tags : (x.Tags ?? []),
-      imageUrl: x.image?.imageURL ?? ""}));
-      render(allSets);
-    }catch{
-      allSets = [
-        {id:1,setId:101,name:'X-Wing',theme:'Star Wars',year:2019,imageUrl:'Picture/set1.png'},
-        {id:2,setId:102,name:'Speeder',theme:'Star Wars',year:2020,imageUrl:'Picture/set2.png'}
-      ];
-      render(allSets);
-    }
-  }
-  function getUserIdFromToken(token) {
-    try {
-      const payload = token.split('.')[1];
-      const decoded = JSON.parse(atob(payload));
-      return decoded.sub || decoded.userId || null;
-    } catch (e) {
-      console.error('Token konnte nicht gelesen werden:', e);
-      return null;
-    }
-  }
-  acceptBtn.addEventListener('click', createBoxWithSets);
-
-  async function createBoxWithSets(){
-    const draft = JSON.parse(sessionStorage.getItem('boxDraft')||'{}');
-    const token = localStorage.getItem('token')||'';
-    const userid = getUserIdFromToken(token);
-    if(!draft.name){ alert('Name fehlt'); return; }
-
-    
-    try{
-      // 1) Box anlegen
-      const r1 = await fetch(API_BOX_BASE, {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token, "x-api-key": "TheLionwants3datelsafter20request" },
-        body: JSON.stringify({ 
-          name : draft.name, 
-          description : draft.description || '',
-          User: {
-             Id: userid}})
+      const cb = document.createElement('input');
+      cb.type='checkbox';
+      cb.checked = selected.has(s.id||s.Id);
+      cb.addEventListener('change',()=>{
+        const key = s.id||s.Id;
+        if(cb.checked) selected.add(key); else selected.delete(key);
       });
-      if(!r1.ok){
-        const txt = await r1.text().catch(()=> '');
-        throw new Error('Box konnte nicht erstellt werden. ' + txt);
+      card.appendChild(cb);
+      return card;
+    }
+
+    function render(list){
+      grid.innerHTML=''; list.forEach(s=>grid.appendChild(makeCard(s)));
+    }
+
+    function applyFilter(){
+      const q = qInput.value.trim().toLowerCase();
+      if(!q){ render(allSets); return; }
+      const filtered = allSets.filter(s=>{
+        const hay=[s.name,s.theme,String(s.year),String(s.setId)].join(' ').toLowerCase();
+        return hay.includes(q);
+      });
+      render(filtered);
+    }
+    let t; qInput.addEventListener('input',()=>{ clearTimeout(t); t=setTimeout(applyFilter,150); });
+
+    init();
+    async function init(){
+      const draftRaw = sessionStorage.getItem('boxDraft');
+      if(!draftRaw){ alert('Kein Box-Entwurf.'); location.href='box-new.html'; return; }
+
+      try{
+        const r = await fetch(API_SETS,{
+      method: "GET",
+      headers: {
+        "Accept": "application/json",
+        "x-api-key": "TheLionwants3datelsafter20request"
       }
-      const newBox = await r1.json(); // erwartet die Box mit ID
-      const boxId = newBox.id ?? newBox.ID;
-      if(!boxId) throw new Error('Box-ID fehlt in der Antwort.');
-     
-      // 2) Sets hinzufügen (optional)
-      const ids = Array.from(selected);
-      for(const setKey of ids){
-        const setObj = allSets.find(s=>(s.id||s.Id)===setKey);
-        if(!setObj) continue;
+    });
+        if(!r.ok) throw new Error();
+        const data = await r.json();
+        allSets = (data||[]).map(x=>({
+          id:x.id??x.Id??x.ID, setId:x.setId??x.SetID??x.setNumber,
+          name:x.name??x.Name??x.title, theme:x.theme??x.Theme,
+          year:x.year??x.Year, imageUrl:x.image?.imageUrl??x.ImageUrl??x.image??x.img
+        }));
+        render(allSets);
+      }catch{
+        allSets = [
+          {id:1,setId:101,name:'X-Wing',theme:'Star Wars',year:2019,imageUrl:'Picture/set1.png'},
+          {id:2,setId:102,name:'Speeder',theme:'Star Wars',year:2020,imageUrl:'Picture/set2.png'}
+        ];
+        render(allSets);
+      }
+    }
 
-        const payload = {
-          id: 0,
-          setId: setObj.setId || setObj.id || 0,
-          name: setObj.name || '',
-          theme: setObj.theme || '',
-          year: setObj.year || 0
-        };
+    acceptBtn.addEventListener('click', createBoxWithSets);
 
-        const r2 = await fetch(`${API_BOX_BASE}/${boxId}/sets`, {
+    async function createBoxWithSets(){
+      const draft = JSON.parse(sessionStorage.getItem('boxDraft')||'{}');
+      const token = localStorage.getItem('token')||'';
+
+      if(!draft.name){ alert('Name fehlt'); return; }
+
+      try{
+        // 1) Box anlegen
+        const r1 = await fetch(API_BOX_BASE, {
           method:'POST',
           headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({ name:draft.name, description:draft.description || '' })
         });
-        if(!r2.ok){
-          const t = await r2.text().catch(()=> '');
-          throw new Error('Set konnte nicht hinzugefügt werden. ' + t);
+        if(!r1.ok){
+          const txt = await r1.text().catch(()=> '');
+          throw new Error('Box konnte nicht erstellt werden. ' + txt);
         }
+        const newBox = await r1.json(); // erwartet die Box mit ID
+        const boxId = newBox.id ?? newBox.ID;
+        if(!boxId) throw new Error('Box-ID fehlt in der Antwort.');
+
+        // 2) Sets hinzufügen (optional)
+        const ids = Array.from(selected);
+        for(const setKey of ids){
+          const setObj = allSets.find(s=>(s.id||s.Id)===setKey);
+          if(!setObj) continue;
+
+          const payload = {
+            id: 0,
+            setId: setObj.setId || setObj.id || 0,
+            name: setObj.name || '',
+            theme: setObj.theme || '',
+            year: setObj.year || 0
+          };
+
+          const r2 = await fetch(`${API_BOX_BASE}/${boxId}/sets`, {
+            method:'POST',
+            headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
+            body: JSON.stringify(payload)
+          });
+          if(!r2.ok){
+            const t = await r2.text().catch(()=> '');
+            throw new Error('Set konnte nicht hinzugefügt werden. ' + t);
+          }
+        }
+
+        // 3) Aufräumen und zurück zur Box-Liste
+        sessionStorage.removeItem('boxDraft');
+        alert('Box erstellt.');
+        location.href = 'box.html';
+
+      }catch(err){
+        alert(String(err.message||err));
       }
-
-      // 3) Aufräumen und zurück zur Box-Liste
-      sessionStorage.removeItem('boxDraft');
-      alert('Box erstellt.');
-      location.href = 'box.html';
-
-    }catch(err){
-      alert(String(err.message||err));
     }
-  }
-</script>
+  </script>
 </body>
 </html>
