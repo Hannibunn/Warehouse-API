@@ -218,7 +218,7 @@ async function init() {
       year: x.year ?? x.Year,
       pieces: x.pieces ?? x.Pieces,
       tags: x.tags ?? x.Tags ?? [],
-      imageUrl: x.imageUrl ?? x.ImageUrl ?? x.image ?? x.img ?? (x.Image ? x.Image.imageURL : "")
+      imag: x.image ?? x.Image ?? x.imageURL ?? x.imageURL ?? (x.imageURL ? x.Image.imageURL : "")
     }));
 
     renderList(allSets);
