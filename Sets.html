@@ -118,13 +118,13 @@
 </footer>
 <div id="form-message" aria-live="polite"></div>
 <script>
-  const API_URL = "https://Setsapi.pleeging.com/api/Warehouseapi";
-  const API_KEY = "TheLionwants3datelsafter20request";
+  const API_URL = "https://Setsapi.pleeging.com/api/Warehouseapi?AdminKey=TheLionwants3datelsafter20request";
 
   const grid = document.getElementById("grid");
   const qInput = document.getElementById("q");
   let allSets = [];
 
+  // Hilfsfunktion zum Erstellen von Elementen
   function el(tag, cls, html) {
     const n = document.createElement(tag);
     if (cls) n.className = cls;
@@ -132,6 +132,7 @@
     return n;
   }
 
+  // Bild mit Fehler-Handling
   function makeImage(url, alt) {
     const wrap = el("div","media");
     const img = new Image();
@@ -150,9 +151,11 @@
     return wrap;
   }
 
+  // Karte für ein Set
   function makeCard(s){
     const card = el("article","card");
     card.appendChild(makeImage(s.imageUrl, s.name));
+
     const meta = el("div","meta");
     meta.appendChild(el("div","name", s.name || "Unbenannt"));
     meta.appendChild(el("div","kv", `Theme: ${s.theme || "-"}`));
@@ -182,11 +185,13 @@
     return card;
   }
 
+  // Liste rendern
   function renderList(list){
     grid.innerHTML = "";
     list.forEach(s => grid.appendChild(makeCard(s)));
   }
 
+  // Filterfunktion
   function applyFilter(){
     const q = qInput.value.trim().toLowerCase();
     if (!q){ renderList(allSets); return; }
@@ -197,41 +202,44 @@
     });
     renderList(filtered);
   }
+
   let t;
   qInput.addEventListener("input",()=>{ clearTimeout(t); t = setTimeout(applyFilter,150); });
 
+  // API abrufen
+  async function fetchSets(){
+    const res = await fetch(API_URL, { method: "GET" });
+    if(!res.ok){
+      const text = await res.text().catch(()=> "");
+      throw new Error(`${res.status} ${text}`);
+    }
+    return res.json();
+  }
+
+  // Initialisierung
   async function init(){
     try{
-      const res = await fetch(API_URL, {
-        method: "GET",
-        headers: {
-          "Accept": "application/json",
-          "AdminKey": API_KEY
-        }
-      });
-      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-      const data = await res.json();
-
+      const data = await fetchSets();
       const arr = Array.isArray(data) ? data : (data.$values || []);
       if (!arr.length) throw new Error("keine Daten");
 
       allSets = arr.map(x=>({
-        id: x.id ?? x.Id ?? x.ID,
-        setId: x.setId ?? x.SetID ?? x.setNumber,
-        name: x.name ?? x.Name ?? x.title,
-        theme: x.theme ?? x.Theme,
-        year: x.year ?? x.Year,
-        pieces: x.pieces ?? x.Pieces,
-        tags: x.tags ?? x.Tags ?? [],
-        imageUrl: x.imageUrl ?? x.ImageUrl ?? x.image ?? x.img ?? (x.Image ? x.Image.imageURL : "")
+        id: x.id ?? x.Id,
+        setId: x.setID ?? x.setId,
+        name: x.name ?? x.Number ?? "Unbenannt",
+        theme: x.theme ?? "-",
+        year: x.year ?? "-",
+        pieces: x.pieces ?? "-",
+        tags: x.ExtendedData?.Tags ?? [],
+        imageUrl: x.Image?.imageURL || "Picture/default.png"
       }));
       renderList(allSets);
     }catch(err){
-      alert("Fehler beim Laden der Sets: " + err.message);
+      console.error(err);
+      alert("API konnte nicht geladen werden, zeige Demo-Daten");
       allSets = [
-        { id: 7, setId: 3074, name: "Darth Mauls Sith Infiltrator", theme: "Star Wars", year: 1974, pieces: 18, tags: ["Aircraft"], imageUrl: "Picture/set1.png" },
-        { id: 8, setId: 4090, name: "Podracer", theme: "Star Wars", year: 1974, pieces: 18, tags: ["Aircraft"], imageUrl: "Picture/set2.png" },
-        { id: 9, setId: 5011, name: "NINJAGO Mech", theme: "Ninjago", year: 2020, pieces: 612, tags: ["Robot"], imageUrl: "Picture/ninjago.png" }
+        { id: 1, setId: 101, name: "Demo Set 1", theme: "Star Wars", year: 2020, pieces: 123, tags:["Demo"], imageUrl:"Picture/set1.png" },
+        { id: 2, setId: 102, name: "Demo Set 2", theme: "Ninjago", year: 2021, pieces: 456, tags:["Demo"], imageUrl:"Picture/set2.png" }
       ];
       renderList(allSets);
     }
@@ -239,6 +247,7 @@
 
   init();
 </script>
+
 
 
 
