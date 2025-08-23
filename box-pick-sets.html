@@ -128,21 +128,34 @@
       render(allSets);
     }
   }
-
+  function getUserIdFromToken(token) {
+    try {
+      const payload = token.split('.')[1];
+      const decoded = JSON.parse(atob(payload));
+      return decoded.sub || decoded.userId || null;
+    } catch (e) {
+      console.error('Token konnte nicht gelesen werden:', e);
+      return null;
+    }
+  }
   acceptBtn.addEventListener('click', createBoxWithSets);
 
   async function createBoxWithSets(){
     const draft = JSON.parse(sessionStorage.getItem('boxDraft')||'{}');
     const token = localStorage.getItem('token')||'';
-
+    const userid = getUserIdFromToken(token);
     if(!draft.name){ alert('Name fehlt'); return; }
 
+    
     try{
       // 1) Box anlegen
       const r1 = await fetch(API_BOX_BASE, {
         method:'POST',
         headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token, "x-api-key": "TheLionwants3datelsafter20request" },
-        body: JSON.stringify({ name:draft.name, description:draft.description || '' })
+        body: JSON.stringify({ 
+          name : draft.name, 
+          description : draft.description || '',
+          User : userid })
       });
       if(!r1.ok){
         const txt = await r1.text().catch(()=> '');
@@ -151,7 +164,7 @@
       const newBox = await r1.json(); // erwartet die Box mit ID
       const boxId = newBox.id ?? newBox.ID;
       if(!boxId) throw new Error('Box-ID fehlt in der Antwort.');
-
+     
       // 2) Sets hinzufügen (optional)
       const ids = Array.from(selected);
       for(const setKey of ids){
