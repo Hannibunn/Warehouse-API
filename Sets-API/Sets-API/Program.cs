@@ -97,45 +97,34 @@ builder.Services.AddCors(options =>
     });
 });
 
-;
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Swagger in Development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-// Verwende die API-Key-Middleware
-app.UseMiddleware<ApiKey_Middelware>();
+
+// HTTPS & Routing
 app.UseHttpsRedirection();
 app.UseRouting();
+
+// CORS muss VOR Middleware / Auth kommen
 app.UseCors("AllowMyWebsite");
-//// Verwende CORS
-//app.UseCors("AllowMyWebsite");
-//app.UseSwaggerUI(c =>
-//{
-//    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sets API V1");
-//    c.RoutePrefix = string.Empty; // Swagger UI unter der Root-URL verfügbar machen
-//});
-//app.UseRouting();
 
+// API-Key Middleware
+app.UseMiddleware<ApiKey_Middelware>();
 
-// Verwende die Authentifizierung
+// Authentifizierung & Autorisierung
 app.UseAuthentication();
 app.UseAuthorization();
 
-
-app.UseHttpsRedirection();
-
-
+// Controller-Routing
 app.MapControllers();
 
 app.Run();
