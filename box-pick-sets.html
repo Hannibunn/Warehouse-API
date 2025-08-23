@@ -101,8 +101,13 @@
     if(!draftRaw){ alert('Kein Box-Entwurf.'); location.href='box-new.html'; return; }
 
     try{
-      const r = await fetch(API_SETS, { headers:{'Accept':'application/json',
-        "x-api-key": "TheLionwants3datelsafter20request"} });
+      const r = await fetch(API_SETS,{
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "x-api-key": "TheLionwants3datelsafter20request"
+    }
+  });
       if(!r.ok) throw new Error();
       const data = await r.json();
       allSets = (data||[]).map(x=>({
