@@ -21,7 +21,6 @@ var key = Encoding.UTF8.GetBytes(jwtSettings["Key"] ?? throw new ArgumentNullExc
 // Füge AuthService als Singleton hinzu
 builder.Services.AddSingleton<AuthService>();
 
-
 // connection for the database with posqre 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -84,7 +83,6 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-
 // User secrets
 builder.Configuration.AddUserSecrets<Program>();
 
@@ -93,7 +91,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowMyWebsite", policy =>
     {
-        policy.WithOrigins("https://hannibunn.github.io/Warehouse-API/")
+        policy.WithOrigins("https://hannibunn.github.io")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -130,7 +128,8 @@ app.UseRouting();
 //app.UseRouting();
 
 
-// Verwende die Authentifizierungapp.UseAuthentication();
+// Verwende die Authentifizierung
+app.UseAuthentication();
 app.UseAuthorization();
 
 
