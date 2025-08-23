@@ -185,20 +185,21 @@
 
   let t;
   qInput.addEventListener("input",()=>{ clearTimeout(t); t = setTimeout(applyFilter,150); });
-
-  async function fetchSets(){
-    const res = await fetch(API_URL, {
-      method: "GET",
-      headers: {
-        "Accept": "application/json"
-      }
-    });
-    if(!res.ok){
-      const text = await res.text().catch(()=> "");
-      throw new Error(`${res.status} ${text}`);
+async function fetchSets() {
+  const res = await fetch(API_URL, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "AdminKey": "TheLionwants3datelsafter20request" // Key hier im Header
     }
-    return res.json();
+  });
+
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
   }
+
+  return res.json();
+}
 
   async function init(){
     try{
