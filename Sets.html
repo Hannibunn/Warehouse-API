@@ -107,14 +107,25 @@ const API_URL = "https://Setsapi.pleeging.com/api/Warehouseapi?AdminKey=TheLionw
 
 async function fetchSets() {
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(API_URL, {
+      method: "GET", // <-- hier ist das GET explizit
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     const data = await res.json();
+    console.log("API Response:", data); // zum Debuggen
 
-    // Prüfen, ob Bilderfeld existiert und richtig zuweisen
     return data.map(s => ({
-      ...s,
-      imageUrl: s.image?.Url || "Picture/placeholder.png" // Fallback Bild
+      id: s.id || "-",
+      setId: s.setID || "-",
+      name: s.name || "-",
+      theme: s.theme || "-",
+      year: s.year || "-",
+      pieces: s.pieces || "-",
+      imageUrl: s.image?.Url || "Picture/placeholder.png"
     }));
   } catch(err) {
     console.error("Fehler beim Laden der Sets:", err);
@@ -126,48 +137,6 @@ async function fetchSets() {
     ];
   }
 }
-
-function makeCard(s) {
-  const card = document.createElement("article");
-  card.className = "card";
-
-  // Bild
-  const imgWrap = document.createElement("div");
-  imgWrap.className = "media";
-  const img = new Image();
-  img.src = s.imageUrl || "Picture/placeholder.png";
-  img.alt = s.name || "";
-  img.loading = "lazy";
-  img.addEventListener("error", () => img.src = "Picture/placeholder.png");
-  imgWrap.appendChild(img);
-  card.appendChild(imgWrap);
-
-  // Meta-Infos
-  const meta = document.createElement("div");
-  meta.className = "meta";
-  meta.innerHTML = `
-    <div class="name">${s.name || "-"}</div>
-    <div class="kv">Theme: ${s.theme || "-"}</div>
-    <div class="kv">Year: ${s.year || "-"}</div>
-    <div class="kv">ID: ${s.id || "-"} | SetID: ${s.setId || "-"}</div>
-    <div class="kv">Pieces: ${s.pieces || "-"}</div>
-  `;
-  card.appendChild(meta);
-
-  return card;
-}
-
-async function renderList() {
-  const grid = document.getElementById("grid");
-  const allSets = await fetchSets();
-
-  grid.innerHTML = "";
-  allSets.forEach(s => grid.appendChild(makeCard(s)));
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderList();
-});
 
 
 </script>
