@@ -105,7 +105,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -118,6 +117,7 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ApiKey_Middelware>();
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors("AllowMyWebsite");
 //// Verwende CORS
 //app.UseCors("AllowMyWebsite");
 //app.UseSwaggerUI(c =>
