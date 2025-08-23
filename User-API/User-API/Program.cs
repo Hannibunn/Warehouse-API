@@ -92,7 +92,7 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
-
+builder.Services.AddControllers();
 var app = builder.Build();
 
 // Swagger in Development
