@@ -120,7 +120,16 @@
 <script>
   const API_URL = "https://Setsapi.pleeging.com/api/Warehouseapi?AdminKey=TheLionwants3datelsafter20request";
 
-  
+
+
+async function fetchSets(){
+  const res = await fetch(API_URL, { method: "GET" });
+  if(!res.ok){
+    const text = await res.text().catch(()=> "");
+    throw new Error(`${res.status} ${text}`);
+  }
+  return res.json();
+}
   const grid = document.getElementById("grid");
   const qInput = document.getElementById("q");
   let allSets = [];
