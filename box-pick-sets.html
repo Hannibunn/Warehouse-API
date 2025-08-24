@@ -44,8 +44,8 @@
 
 <script>
   // Endpoints
-  const API_SETS = '/api/sets';
-  const API_BOX_BASE = '/api/Login'; // POST /api/Login -> CreateBox; POST /api/Login/{boxId}/sets -> AddSet
+  const API_SETS = "https://Setsapi.pleeging.com/api/Warehouseapi/latest";
+  const API_BOX_BASE = 'https://userapi.pleeging.com/api/Login'; // POST /api/Login -> CreateBox; POST /api/Login/{boxId}/sets -> AddSet
 
   const grid = document.getElementById('grid');
   const qInput = document.getElementById('q');
@@ -62,7 +62,7 @@
   function makeCard(s){
     const card=el('label','card');
     const top=el('div','media');
-    const img=new Image(); img.src=s.imageUrl||''; img.alt=s.name||''; img.loading='lazy';
+    const img=new Image(); img.src=s.image?.imageURL||''; img.alt=s.name||''; img.loading='lazy';
     img.onerror=()=>{ img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260"><rect width="100%" height="100%" fill="#ddd"/></svg>') }
     top.appendChild(img); card.appendChild(top);
 
@@ -101,14 +101,24 @@
     if(!draftRaw){ alert('Kein Box-Entwurf.'); location.href='box-new.html'; return; }
 
     try{
-      const r = await fetch(API_SETS, { headers:{'Accept':'application/json'} });
+      const r = await fetch(API_SETS,{
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "x-api-key": "TheLionwants3datelsafter20request"
+    }
+  });
       if(!r.ok) throw new Error();
       const data = await r.json();
-      allSets = (data||[]).map(x=>({
-        id:x.id??x.Id??x.ID, setId:x.setId??x.SetID??x.setNumber,
-        name:x.name??x.Name??x.title, theme:x.theme??x.Theme,
-        year:x.year??x.Year, imageUrl:x.imageUrl??x.ImageUrl??x.image??x.img
-      }));
+     allSets = (data||[]).map(x => ({
+  id: x.id ?? x.Id ?? x.ID,
+  setId: x.setId ?? x.setID ?? x.SetID ?? x.setNumber,
+  name: x.name ?? x.Name ?? x.title,
+  theme: x.theme ?? x.Theme,
+  year: x.year ?? x.Year,
+  imageUrl: x.image?.imageURL ?? x.image?.imageUrl ?? x.ImageUrl ?? x.image ?? x.img
+}));
+
       render(allSets);
     }catch{
       allSets = [
@@ -129,11 +139,19 @@
 
     try{
       // 1) Box anlegen
-      const r1 = await fetch(API_BOX_BASE, {
-        method:'POST',
-        headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
-        body: JSON.stringify({ name:draft.name, description:draft.description || '' })
-      });
+  const r1 = await fetch(API_BOX_BASE, {
+  method:'POST',
+  headers:{ 
+    'Content-Type':'application/json',
+    'Authorization':'Bearer ' + token,
+    'x-api-key': 'TheLionwants3datelsafter20request'
+  },
+  body: JSON.stringify({ 
+    name: draft.name, 
+    description: draft.description || '' 
+  })
+});
+
       if(!r1.ok){
         const txt = await r1.text().catch(()=> '');
         throw new Error('Box konnte nicht erstellt werden. ' + txt);
@@ -157,10 +175,15 @@
         };
 
         const r2 = await fetch(`${API_BOX_BASE}/${boxId}/sets`, {
-          method:'POST',
-          headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+token },
-          body: JSON.stringify(payload)
-        });
+  method:'POST',
+  headers:{ 
+    'Content-Type':'application/json', 
+    'Authorization':'Bearer '+token,
+    'x-api-key': 'TheLionwants3datelsafter20request'
+  },
+  body: JSON.stringify(payload)
+});
+
         if(!r2.ok){
           const t = await r2.text().catch(()=> '');
           throw new Error('Set konnte nicht hinzugefügt werden. ' + t);

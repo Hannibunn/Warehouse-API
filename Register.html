@@ -6,8 +6,8 @@
   <title>Register</title>
   <style>
     :root{
-      --night-1:#2b2424;   /* oben */
-      --night-2:#1a1414;   /* unten */
+      --night-1:#2b2424;   
+      --night-2:#1a1414;   
       --ink:#111;
       --muted:#dcdcdc;
       --radius:14px;
@@ -24,16 +24,12 @@
       grid-template-columns:1.12fr 1.38fr;
       box-shadow:0 8px 24px rgba(0,0,0,.18);
     }
-
-    /* Linke Bildhälfte */
     .visual{position:relative;overflow:hidden;background:linear-gradient(to bottom,var(--night-1),var(--night-2))}
     .stars{position:absolute;inset:0;width:100%;height:40%;object-fit:cover;opacity:.9}
     .moon{position:absolute;top:0px;left:280px;width:230px;height:auto}
     .cloud1{position:absolute;top:2px;left:18px;width:210px;height:auto}
     .cloud2{position:absolute;top:140px;left:320px;width:180px;height:auto}
     .person{position:absolute;left:34px;bottom:0;width:360px;height:auto}
-
-    /* Rechte Formularhälfte */
     .form{padding:48px 56px;display:flex;flex-direction:column;gap:24px}
     .title{font-weight:800;font-size:64px;margin:0 0 6px 0}
     label{font-weight:600;font-size:18px}
@@ -43,8 +39,6 @@
     }
     .actions{display:flex;gap:36px;margin-top:12px}
     .btn{flex:1 1 220px;padding:16px 20px;border-radius:var(--radius);border:none;background:#d9d9d9;font-size:20px;font-weight:600;cursor:pointer}
-
-    /* Responsive */
     @media (max-width: 900px){
       .card{grid-template-columns:1fr;height:auto}
       .visual{height:360px}
@@ -61,7 +55,6 @@
 <body>
   <div class="page">
     <section class="card">
-      <!-- Linke Hälfte -->
       <div class="visual" aria-hidden="true">
         <img class="stars"  src="Picture/sterne.png"  alt="">
         <img class="moon"   src="Picture/Mond.png"      alt="Mond">
@@ -70,38 +63,60 @@
         <img class="person" src="Picture/registerpicture.png"    alt="Person">
       </div>
 
-      <!-- Rechte Hälfte -->
-      <form class="form" autocomplete="on">
+      <form class="form" id="register-form" autocomplete="on">
         <h1 class="title">Register</h1>
-        
-
-            
-        <div class="control">
-         <label for="username">username</label>
-         <input id="username" name="username" type="text" placeholder="text" required>
-         </div>
 
         <div class="control">
-          <label for="email">em@il</label>
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" placeholder="Dein Benutzername" required>
+        </div>
+
+        <div class="control">
+          <label for="email">E-Mail</label>
           <input id="email" name="email" type="email" placeholder="example@gmail.com" required>
         </div>
 
         <div class="control">
-          <label for="pw">passwort</label>
-          <input id="pw" name="password" type="password" placeholder="xxxxxx" required>
+          <label for="pw">Passwort</label>
+          <input id="pw" name="password" type="password" placeholder="******" required>
         </div>
 
         <div class="actions">
-         <a href="Login.html"> <button type="button" class="btn" id="to-login">Login</button></a>
-         <a href="versuch.html"> <button type="submit" class="btn">Register</button></a>
+          <a href="index.html"><button type="button" class="btn">Login</button></a>
+          <button type="submit" class="btn">Register</button>
         </div>
       </form>
     </section>
   </div>
 
   <script>
-    document.getElementById('to-login').addEventListener('click',()=>alert('Zur Login-Seite wechseln'));
-    document.querySelector('form').addEventListener('submit',(e)=>{e.preventDefault();alert('Register submit – API anschließen');});
+    document.getElementById("register-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("pw").value.trim();
+
+      try {
+        const response = await fetch("https://userapi.pleeging.com/api/anmelden/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ username,email,password })
+        });
+
+        if (response.ok) {
+          alert("Registrierung erfolgreich!");
+          window.location.href = "index.html"; // Weiterleitung
+        } else {
+          const errorText = await response.text();
+          alert("Fehler bei der Registrierung: " + errorText);
+        }
+      } catch (err) {
+        alert("Verbindungsfehler: " + err.message);
+      }
+    });
   </script>
 </body>
 </html>
