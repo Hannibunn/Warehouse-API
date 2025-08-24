@@ -217,9 +217,8 @@ async function init() {
       theme: x.theme,
       year: x.year,
       pieces: x.pieces,
-      tags: Array.isArray(x.extendedData?.tags) ? x.extendedData.tags : (x.Tags ?? []),
+      tags: Array.isArray(x?.extendedData?.tags) ? x.extendedData.tags : [],
       imageUrl: x.image?.imageURL ?? ""}));
-
     renderList(allSets);
   } catch (err) {
     alert("Fehler beim Laden der Sets: " + err.message);

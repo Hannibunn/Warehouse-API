@@ -110,14 +110,13 @@
   });
       if(!r.ok) throw new Error();
       const data = await r.json();
-     allSets = (data||[]).map(x => ({
-  id: x.id ?? x.Id ?? x.ID,
-  setId: x.setId ?? x.setID ?? x.SetID ?? x.setNumber,
-  name: x.name ?? x.Name ?? x.title,
-  theme: x.theme ?? x.Theme,
-  year: x.year ?? x.Year,
-  imageUrl: x.image?.imageURL ?? x.image?.imageUrl ?? x.ImageUrl ?? x.image ?? x.img
-}));
+      allSets = (data||[]).map(x => ({ 
+      id: x.id,
+      setId: x.setID,
+      name: x.name,
+      theme: x.theme,
+      year: x.year,
+      imageUrl: x.image?.imageURL ?? ""}));
 
       render(allSets);
     }catch{
@@ -131,10 +130,22 @@
 
   acceptBtn.addEventListener('click', createBoxWithSets);
 
+function getUserIdFromToken(token) {
+  try {
+    const payload = token.split('.')[1];
+    const decoded = JSON.parse(atob(payload));
+    return decoded.sub || decoded.userId || null;
+  } catch (e) {
+    console.error('Token konnte nicht gelesen werden:', e);
+    return null;
+  }
+}
+
+
   async function createBoxWithSets(){
     const draft = JSON.parse(sessionStorage.getItem('boxDraft')||'{}');
     const token = localStorage.getItem('token')||'';
-
+    const userid = getUserIdFromToken(token);
     if(!draft.name){ alert('Name fehlt'); return; }
 
     try{
@@ -148,7 +159,10 @@
   },
   body: JSON.stringify({ 
     name: draft.name, 
-    description: draft.description || '' 
+    description: draft.description || '',
+    User: {
+      id : userid
+    }
   })
 });
 
