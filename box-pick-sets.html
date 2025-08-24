@@ -110,11 +110,15 @@
   });
       if(!r.ok) throw new Error();
       const data = await r.json();
-      allSets = (data||[]).map(x=>({
-        id:x.id??x.Id??x.ID, setId:x.setId??x.SetID??x.setNumber,
-        name:x.name??x.Name??x.title, theme:x.theme??x.Theme,
-        year:x.year??x.Year, imageUrl:x.image?.imageUrl??x.ImageUrl??x.image??x.img
-      }));
+     allSets = (data||[]).map(x => ({
+  id: x.id ?? x.Id ?? x.ID,
+  setId: x.setId ?? x.setID ?? x.SetID ?? x.setNumber,
+  name: x.name ?? x.Name ?? x.title,
+  theme: x.theme ?? x.Theme,
+  year: x.year ?? x.Year,
+  imageUrl: x.image?.imageURL ?? x.image?.imageUrl ?? x.ImageUrl ?? x.image ?? x.img
+}));
+
       render(allSets);
     }catch{
       allSets = [
